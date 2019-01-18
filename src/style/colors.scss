@@ -1,0 +1,15 @@
+$color-black: #323943;
+$color-grey-dark: #545A62;
+$color-grey-light: #9FA2A7;
+$color-offwhite: #EBEBEB;
+$color-background: #FAFAFA;
+$color-borders: $color-grey-light;
+$color-rep: #BC2929;
+$color-dem: #5586EF;
+$color-ind: #3BAC69;
+
+$political-party-colors: (
+  republican: $color-rep,
+  democrat: $color-dem,
+  independent: $color-ind,
+);

@@ -1,0 +1,407 @@
+[
+  {
+    "name": "Alabama",
+    "postal": "AL",
+    "fips": 1,
+    "status": "State"
+  },
+  {
+    "name": "Alaska",
+    "postal": "AK",
+    "fips": 2,
+    "status": "State"
+  },
+  {
+    "name": "Arizona",
+    "postal": "AZ",
+    "fips": 4,
+    "status": "State"
+  },
+  {
+    "name": "Arkansas",
+    "postal": "AR",
+    "fips": 5,
+    "status": "State"
+  },
+  {
+    "name": "California",
+    "postal": "CA",
+    "fips": 6,
+    "status": "State"
+  },
+  {
+    "name": "Colorado",
+    "postal": "CO",
+    "fips": 8,
+    "status": "State"
+  },
+  {
+    "name": "Connecticut",
+    "postal": "CT",
+    "fips": 9,
+    "status": "State"
+  },
+  {
+    "name": "Delaware",
+    "postal": "DE",
+    "fips": 10,
+    "status": "State"
+  },
+  {
+    "name": "District of Columbia",
+    "postal": "DC",
+    "fips": 11,
+    "status": "Federal district"
+  },
+  {
+    "name": "Florida",
+    "postal": "FL",
+    "fips": 12,
+    "status": "State"
+  },
+  {
+    "name": "Georgia",
+    "postal": "GA",
+    "fips": 13,
+    "status": "State"
+  },
+  {
+    "name": "Hawaiʻi",
+    "postal": "HI",
+    "fips": 15,
+    "status": "State"
+  },
+  {
+    "name": "Idaho",
+    "postal": "ID",
+    "fips": 16,
+    "status": "State"
+  },
+  {
+    "name": "Illinois",
+    "postal": "IL",
+    "fips": 17,
+    "status": "State"
+  },
+  {
+    "name": "Indiana",
+    "postal": "IN",
+    "fips": 18,
+    "status": "State"
+  },
+  {
+    "name": "Iowa",
+    "postal": "IA",
+    "fips": 19,
+    "status": "State"
+  },
+  {
+    "name": "Kansas",
+    "postal": "KS",
+    "fips": 20,
+    "status": "State"
+  },
+  {
+    "name": "Kentucky",
+    "postal": "KY",
+    "fips": 21,
+    "status": "State"
+  },
+  {
+    "name": "Louisiana",
+    "postal": "LA",
+    "fips": 22,
+    "status": "State"
+  },
+  {
+    "name": "Maine",
+    "postal": "ME",
+    "fips": 23,
+    "status": "State"
+  },
+  {
+    "name": "Maryland",
+    "postal": "MD",
+    "fips": 24,
+    "status": "State"
+  },
+  {
+    "name": "Massachusetts",
+    "postal": "MA",
+    "fips": 25,
+    "status": "State"
+  },
+  {
+    "name": "Michigan",
+    "postal": "MI",
+    "fips": 26,
+    "status": "State"
+  },
+  {
+    "name": "Minnesota",
+    "postal": "MN",
+    "fips": 27,
+    "status": "State"
+  },
+  {
+    "name": "Mississippi",
+    "postal": "MS",
+    "fips": 28,
+    "status": "State"
+  },
+  {
+    "name": "Missouri",
+    "postal": "MO",
+    "fips": 29,
+    "status": "State"
+  },
+  {
+    "name": "Montana",
+    "postal": "MT",
+    "fips": 30,
+    "status": "State"
+  },
+  {
+    "name": "Nebraska",
+    "postal": "NE",
+    "fips": 31,
+    "status": "State"
+  },
+  {
+    "name": "Nevada",
+    "postal": "NV",
+    "fips": 32,
+    "status": "State"
+  },
+  {
+    "name": "New Hampshire",
+    "postal": "NH",
+    "fips": 33,
+    "status": "State"
+  },
+  {
+    "name": "New Jersey",
+    "postal": "NJ",
+    "fips": 34,
+    "status": "State"
+  },
+  {
+    "name": "New Mexico",
+    "postal": "NM",
+    "fips": 35,
+    "status": "State"
+  },
+  {
+    "name": "New York",
+    "postal": "NY",
+    "fips": 36,
+    "status": "State"
+  },
+  {
+    "name": "North Carolina",
+    "postal": "NC",
+    "fips": 37,
+    "status": "State"
+  },
+  {
+    "name": "North Dakota",
+    "postal": "ND",
+    "fips": 38,
+    "status": "State"
+  },
+  {
+    "name": "Ohio",
+    "postal": "OH",
+    "fips": 39,
+    "status": "State"
+  },
+  {
+    "name": "Oklahoma",
+    "postal": "OK",
+    "fips": 40,
+    "status": "State"
+  },
+  {
+    "name": "Oregon",
+    "postal": "OR",
+    "fips": 41,
+    "status": "State"
+  },
+  {
+    "name": "Pennsylvania",
+    "postal": "PA",
+    "fips": 42,
+    "status": "State"
+  },
+  {
+    "name": "Rhode Island",
+    "postal": "RI",
+    "fips": 44,
+    "status": "State"
+  },
+  {
+    "name": "South Carolina",
+    "postal": "SC",
+    "fips": 45,
+    "status": "State"
+  },
+  {
+    "name": "South Dakota",
+    "postal": "SD",
+    "fips": 46,
+    "status": "State"
+  },
+  {
+    "name": "Tennessee",
+    "postal": "TN",
+    "fips": 47,
+    "status": "State"
+  },
+  {
+    "name": "Texas",
+    "postal": "TX",
+    "fips": 48,
+    "status": "State"
+  },
+  {
+    "name": "Utah",
+    "postal": "UT",
+    "fips": 49,
+    "status": "State"
+  },
+  {
+    "name": "Vermont",
+    "postal": "VT",
+    "fips": 50,
+    "status": "State"
+  },
+  {
+    "name": "Virginia",
+    "postal": "VA",
+    "fips": 51,
+    "status": "State"
+  },
+  {
+    "name": "Washington",
+    "postal": "WA",
+    "fips": 53,
+    "status": "State"
+  },
+  {
+    "name": "West Virginia",
+    "postal": "WV",
+    "fips": 54,
+    "status": "State"
+  },
+  {
+    "name": "Wisconsin",
+    "postal": "WI",
+    "fips": 55,
+    "status": "State"
+  },
+  {
+    "name": "Wyoming",
+    "postal": "WY",
+    "fips": 56,
+    "status": "State"
+  },
+  {
+    "name": "American Samoa",
+    "postal": "AS",
+    "fips": 60,
+    "status": "Outlying area under U.S. sovereignty"
+  },
+  {
+    "name": "Federated States of Micronesia",
+    "postal": "FM",
+    "fips": 64,
+    "status": "Freely Associated State"
+  },
+  {
+    "name": "Guam",
+    "postal": "GU",
+    "fips": 66,
+    "status": "Outlying area under U.S. sovereignty"
+  },
+  {
+    "name": "Johnston Atoll",
+    "fips": 67,
+    "status": "Minor outlying island territory"
+  },
+  {
+    "name": "Marshall Islands",
+    "postal": "MH",
+    "fips": 68,
+    "status": "Freely Associated State"
+  },
+  {
+    "name": "Northern Mariana Islands",
+    "postal": "MP",
+    "fips": 69,
+    "status": "Outlying area under U.S. sovereignty"
+  },
+  {
+    "name": "Palau",
+    "postal": "PW",
+    "fips": 70,
+    "status": "Freely Associated State"
+  },
+  {
+    "name": "Midway Islands",
+    "fips": 71,
+    "status": "Minor outlying island territory"
+  },
+  {
+    "name": "Puerto Rico",
+    "postal": "PR",
+    "fips": 72,
+    "status": "Outlying area under U.S. sovereignty"
+  },
+  {
+    "name": "U.S. Minor Outlying Islands",
+    "postal": "UM",
+    "fips": 74,
+    "status": "Minor outlying island territories (aggregated)"
+  },
+  {
+    "name": "Navassa Island",
+    "fips": 76,
+    "status": "Minor outlying island territory"
+  },
+  {
+    "name": "Virgin Islands of the U.S.",
+    "postal": "VI",
+    "fips": 78,
+    "status": "Outlying area under U.S. sovereignty"
+  },
+  {
+    "name": "Wake Island",
+    "fips": 79,
+    "status": "Minor outlying island territory"
+  },
+  {
+    "name": "Baker Island",
+    "fips": 81,
+    "status": "Minor outlying island territory"
+  },
+  {
+    "name": "Howland Island",
+    "fips": 84,
+    "status": "Minor outlying island territory"
+  },
+  {
+    "name": "Jarvis Island",
+    "fips": 86,
+    "status": "Minor outlying island territory"
+  },
+  {
+    "name": "Kingman Reef",
+    "fips": 89,
+    "status": "Minor outlying island territory"
+  },
+  {
+    "name": "Palmyra Atoll",
+    "fips": 95,
+    "status": "Minor outlying island territory"
+  }
+]

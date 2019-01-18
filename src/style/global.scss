@@ -1,0 +1,60 @@
+/*
+ * GLOBAL STYLES
+ */
+@import "fonts";
+@import "colors";
+
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  height: 100%;
+  font-family: National, sans-serif;
+  font-weight: normal;
+  color: $color-black;
+  background: $color-background;
+}
+
+h1 {
+  font-family: Frederick, serif;
+  font-size: 2.4rem;
+}
+
+h2 {
+  font-family: National, sans-serif;
+  font-weight: 100;
+  font-size: 2.5rem;
+  margin: 0;
+}
+
+h4 {
+  font-family: Frederick, serif;
+  font-size: 1.25rem;
+  margin: 0;
+  margin-bottom: 1rem;
+}
+
+hr {
+  border: none;
+  border-bottom: 1px solid $color-borders;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}

@@ -1,18 +1,20 @@
-import React, { Component } from 'react';
-import './App.css';
+import React, { PureComponent } from 'react';
+import { Route, RouteComponentProps, withRouter } from 'react-router-dom';
+import _ from 'lodash';
+import 'normalize.css';
+import NationalMap from './NationalMap';
+import StateDetails from './StateDetails';
+import './App.scss';
 
-class App extends Component {
+class App extends PureComponent<RouteComponentProps> {
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <p>
-            This site is under construction. Please check back later.
-          </p>
-        </header>
+        <NationalMap />
+        <Route path="/:postal" component={StateDetails} />
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(App);
