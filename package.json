@@ -20,6 +20,7 @@
     "react-dom": "^16.7.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.3",
+    "s3-deploy": "^1.2.0",
     "topojson": "^3.0.2",
     "typescript": "3.2.2"
   },
@@ -27,7 +28,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "enable-deploy": "chmod +x node_modules/s3-deploy/dist/index.js",
+    "deploy": "node node_modules/s3-deploy/dist/index.js './build/**' --cwd './build/' --deleteRemoved --gzip --bucket 'new-mapmyreps'"
   },
   "eslintConfig": {
     "extends": "react-app"
