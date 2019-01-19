@@ -1,0 +1,9 @@
+@import "style/measurements";
+
+.page {
+  padding-top: $navbar-height;
+}
+
+.content {
+  padding: calc(0.5rem + 2%);
+}

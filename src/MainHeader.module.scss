@@ -1,0 +1,42 @@
+@import 'style/colors';
+@import 'style/measurements';
+
+.header {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: $navbar-height;
+  background: $color-background;
+  border-bottom: 1px solid lighten($color-borders, 25%);
+
+  .content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+
+    &:first-child,
+    &:last-child {
+      padding: 0 1rem;
+    }
+  }
+
+  a,
+  a:hover {
+    text-decoration: none;
+  }
+
+  h1 {
+    font-weight: normal;
+  }
+
+  .link {
+    font-family: National, sans-serif;
+    font-weight: normal;
+    font-size: 20px;
+  }
+}
