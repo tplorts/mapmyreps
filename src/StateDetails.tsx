@@ -12,7 +12,7 @@ class StateDetails extends PureComponent<
     return (
       <div>
         <p>{this.props.match.params.postal}</p>
-        <Link to="/">Back</Link>
+        <Link to='/'>Back</Link>
       </div>
     );
   }
