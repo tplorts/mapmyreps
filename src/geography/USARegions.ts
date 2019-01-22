@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import allRegions from '../fixtures/USARegions.json';
+import allRegions from './USARegions.json';
 
 export interface USARegion {
   name: string;
@@ -44,5 +44,9 @@ export function getStateByFIPS(fipsCode: number) {
 const statesByPostal = _.keyBy(states, 'postal');
 
 export function getStateByPostal(postalCode: string) {
-  return statesByPostal[postalCode];
+  return statesByPostal[_.toLower(postalCode)];
+}
+
+export function getStateNameForPostal(postalCode: string) {
+  return _.get(getStateByPostal(postalCode), 'name', '');
 }

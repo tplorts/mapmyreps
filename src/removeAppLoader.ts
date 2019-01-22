@@ -1,5 +1,11 @@
 import { getMillisecondsForCSSDuration, pause } from './utilities/temporal';
 
+function getFadeDuration(loaderElement: Element) {
+  const { transitionDuration } = window.getComputedStyle(loaderElement);
+
+  return getMillisecondsForCSSDuration(transitionDuration, 1e3);
+}
+
 export default async function removeAppLoader() {
   const loaderElement = document.getElementById('pre-app-loader');
 
@@ -9,9 +15,7 @@ export default async function removeAppLoader() {
 
   loaderElement.classList.add('removing');
 
-  const { transitionDuration } = window.getComputedStyle(loaderElement);
-
-  await pause(getMillisecondsForCSSDuration(transitionDuration, 1e3));
+  await pause(getFadeDuration(loaderElement));
 
   loaderElement.remove();
 

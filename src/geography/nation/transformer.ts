@@ -1,24 +1,9 @@
 import { GeoPath, geoPath } from 'd3-geo';
-import { feature, mesh, UsAtlas } from 'topojson';
-import _ from 'lodash';
-import { USARegion, getStateByFIPS, USAState } from './USARegions';
 import { Feature } from 'geojson';
-
-export interface XYPoint {
-  x: number;
-  y: number;
-}
-
-export interface XYBoundingBox {
-  bottomLeft: XYPoint;
-  topRight: XYPoint;
-}
-
-export interface StateFeature extends USAState {
-  pathString: string;
-  centroid: XYPoint;
-  bounds: XYBoundingBox;
-}
+import _ from 'lodash';
+import { feature, mesh, UsAtlas } from 'topojson';
+import { getStateByFIPS } from '../USARegions';
+import { StateFeature, XYBoundingBox, XYPoint, XYSize } from './types';
 
 export class NationalAtlasTransformer {
   private topology: UsAtlas;
@@ -29,17 +14,17 @@ export class NationalAtlasTransformer {
     this.path = geoPath();
   }
 
-  getStateBordersPathString = () => {
+  getStateBordersPathString = (): string => {
     const meshString = mesh(
       this.topology,
       this.topology.objects.states,
       (a, b) => a !== b
     );
 
-    return this.path(meshString);
+    return this.path(meshString) || '';
   };
 
-  getStateFeatures = () => {
+  getStateFeatures = (): StateFeature[] => {
     const { features } = feature(this.topology, this.topology.objects.states);
 
     return _.chain(features)
@@ -55,7 +40,7 @@ export class NationalAtlasTransformer {
     bounds: this.getFeatureBounds(feature),
   });
 
-  getSize = () => {
+  getSize = (): XYSize => {
     const [left, top, right, bottom] = this.topology.bbox;
 
     return {
@@ -64,7 +49,7 @@ export class NationalAtlasTransformer {
     };
   };
 
-  getOffset = () => {
+  getOffset = (): XYPoint => {
     const [left, top] = this.topology.bbox;
 
     return {
@@ -73,7 +58,9 @@ export class NationalAtlasTransformer {
     };
   };
 
-  private getPathString = (feature: Feature) => this.path(feature);
+  private getPathString(feature: Feature): string {
+    return this.path(feature) || '';
+  }
 
   private getFeatureCentroid = (feature: Feature): XYPoint => {
     const [x, y] = this.path.centroid(feature);
