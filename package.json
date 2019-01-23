@@ -16,7 +16,7 @@
     "@types/topojson": "^3.2.1",
     "d3-geo": "^1.11.3",
     "lodash": "^4.17.11",
-    "moment": "^2.23.0",
+    "moment": "^2.24.0",
     "node-sass": "^4.11.0",
     "normalize.css": "^8.0.1",
     "react": "^16.7.0",

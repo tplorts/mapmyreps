@@ -5,7 +5,7 @@ import 'normalize.css';
 import MainHeader from './MainHeader';
 import NationalMap from './geography/nation/Map';
 import About from './About';
-import StateDetails from './StateDetails';
+import StateView from './congress/StateView';
 import styles from './App.module.scss';
 
 const App = () => (
@@ -15,7 +15,7 @@ const App = () => (
       <NationalMap />
     </div>
     <Route path='/about' exact component={About} />
-    <Route path='/:postal([A-Za-z]{2})' component={StateDetails} />
+    <Route path='/:postal([A-Za-z]{2})' component={StateView} />
   </div>
 );
 

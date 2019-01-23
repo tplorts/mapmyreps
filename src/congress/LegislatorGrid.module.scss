@@ -1,0 +1,10 @@
+
+$size: 48px;
+$ring-thickness: 2px;
+$tile-size: $size + 2 * $ring-thickness;
+
+.grid {
+  display: grid;
+  grid-gap: 12px;
+  grid-template-columns: repeat(auto-fit, $tile-size);
+}

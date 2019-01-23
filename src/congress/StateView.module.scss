@@ -1,0 +1,54 @@
+@import '../style/colors';
+
+.root {
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
+}
+
+.title {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  .back-button {
+    margin-right: 1rem;
+    position: absolute;
+    z-index: 1;
+  }
+
+  h4 {
+    position: relative;
+    top: -3px;
+    flex: 1;
+    font-size: 1.5rem;
+    margin-left: 5rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.overview {
+  flex: 2;
+
+  @media (min-width: 768px) {
+    padding-right: 4rem;
+  }
+}
+
+.map {
+
+}
+
+.legislators {
+  
+}
+
+.legislatorDetails {
+  flex: 3;
+}

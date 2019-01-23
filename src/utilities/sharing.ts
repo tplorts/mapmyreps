@@ -30,7 +30,7 @@ function queryParams(params: object) {
     .value();
 }
 
-const shareUrlDict = {
+const shareUrlIndex = {
   mail:
     `mailto:?` +
     queryParams({
@@ -62,4 +62,4 @@ const shareUrlDict = {
     }),
 };
 
-export const getShareUrl = (medium: SocialMedium) => shareUrlDict[medium];
+export const getShareUrl = (medium: SocialMedium) => shareUrlIndex[medium];

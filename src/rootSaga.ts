@@ -4,13 +4,14 @@ import { loadNationalAtlasSaga } from './geography/nation/saga';
 import removeAppLoader from './removeAppLoader';
 import viewportResizeWatcher from './viewport/resizeWatcher';
 import nationalMapResizeWatcher from './geography/nation/resize.saga';
+import loadCongressSaga from './congress/load.saga';
 
 export default function* rootSaga() {
   yield fork(initiateWatchers);
 
   yield all([
     call(loadNationalAtlasSaga),
-    // call(loadCongress),
+    call(loadCongressSaga),
   ]);
 
   yield delay(500);
