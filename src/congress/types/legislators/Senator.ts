@@ -27,7 +27,7 @@ export default class Senator extends Legislator {
     return this.presentTerm.state_rank || null;
   }
 
-  public isSenator() {
+  public get isSenator() {
     return true;
   }
 

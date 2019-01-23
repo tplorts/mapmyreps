@@ -7,17 +7,15 @@ import * as selectors from './selectors';
 import LegislatorGrid from './LegislatorGrid';
 import styles from './StateView.module.scss';
 
-interface StateRouteParams {
+export interface RouteParams {
   postal: string;
 }
 
-type RouteProps = RouteComponentProps<StateRouteParams>;
+export type RouteProps = RouteComponentProps<RouteParams>;
 
 const mapStateToProps = (state: Root.State, ownProps: RouteProps) => ({
-  legislators: selectors.getLegislatorsForState(
-    state,
-    ownProps.match.params.postal
-  ),
+  senators: selectors.getSenatorsForState(state, ownProps),
+  representatives: selectors.getRepresentativesForState(state, ownProps),
 });
 
 type Props = RouteProps & ReturnType<typeof mapStateToProps>;
@@ -37,10 +35,13 @@ class StateView extends PureComponent<Props> {
           </div>
           <div className={styles.map} />
           <div className={styles.legislators}>
-            <LegislatorGrid title='Senators' legislators={[]} />
+            <LegislatorGrid
+              title='Senators'
+              legislators={this.props.senators}
+            />
             <LegislatorGrid
               title='Representatives'
-              legislators={this.props.legislators}
+              legislators={this.props.representatives}
             />
           </div>
         </div>

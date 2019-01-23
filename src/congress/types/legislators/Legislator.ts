@@ -221,16 +221,12 @@ export default class Legislator {
     return -1;
   }
 
-  public isSenator() {
+  public get isSenator() {
     return false;
   }
 
-  public isRepresentative() {
+  public get isRepresentative() {
     return false;
-  }
-
-  public get partyStyleClass() {
-    return `party-${this.party.toLowerCase()}`;
   }
 
   public get availableSocialMedia() {

@@ -20,7 +20,7 @@ export default class Representative extends Legislator {
     return this.presentTerm.district;
   }
 
-  public isRepresentative() {
+  public get isRepresentative() {
     return true;
   }
 

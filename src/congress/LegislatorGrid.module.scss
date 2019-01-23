@@ -1,10 +1,50 @@
+@import '../style/colors';
 
-$size: 48px;
+$size: 64px;
 $ring-thickness: 2px;
 $tile-size: $size + 2 * $ring-thickness;
+
+.root {
+  margin-bottom: 2em;
+}
 
 .grid {
   display: grid;
   grid-gap: 12px;
   grid-template-columns: repeat(auto-fit, $tile-size);
+}
+
+.tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: $ring-thickness;
+  width: $size;
+  height: $size;
+  overflow: hidden;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 0 0 $ring-thickness grey;
+
+  @each $party, $color in $party-color-index {
+    &.#{$party} {
+      box-shadow: 0 0 0 $ring-thickness $color;
+    }
+  }
+
+  opacity: 0.5;
+  transition: opacity, 0.2s;
+
+  .noSelection &,
+  .selected & {
+    opacity: 1;
+  }
+}
+
+.link {
+  border-radius: 50%;
+}
+
+.avatar {
+  width: 100%;
 }

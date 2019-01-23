@@ -8,8 +8,8 @@ $color-rep: #BC2929;
 $color-dem: #5586EF;
 $color-ind: #3BAC69;
 
-$political-party-colors: (
-  republican: $color-rep,
-  democrat: $color-dem,
-  independent: $color-ind,
+$party-color-index: (
+  Republican: $color-rep,
+  Democrat: $color-dem,
+  Independent: $color-ind,
 );
