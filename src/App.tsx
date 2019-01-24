@@ -9,7 +9,7 @@ import StateView from './congress/StateView';
 import styles from './App.module.scss';
 
 const App = () => (
-  <div className={styles.page}>
+  <div className={styles.root}>
     <MainHeader />
     <div className={styles.content}>
       <NationalMap />
