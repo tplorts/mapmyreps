@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { RouteComponentProps, withRouter, Link } from 'react-router-dom';
+import { RouteComponentProps, withRouter, Link, Route } from 'react-router-dom';
 import { getStateNameForPostal } from '../geography/USARegions';
 import * as Root from '../rootTypes';
 import * as selectors from './selectors';
 import LegislatorGrid from './LegislatorGrid';
+import LegislatorView from './LegislatorView';
 import styles from './StateView.module.scss';
 
 export interface RouteParams {
@@ -27,7 +28,7 @@ class StateView extends PureComponent<Props> {
 
   render() {
     return (
-      <div className={styles.root}>
+      <div className={`container ${styles.root}`}>
         <div className={styles.overview}>
           <div className={styles.title}>
             <Link to='/'>Back</Link>
@@ -45,7 +46,12 @@ class StateView extends PureComponent<Props> {
             />
           </div>
         </div>
-        <div className={styles.legislatorDetails} />
+        <div className={styles.legislatorDetails}>
+          <Route
+            path={`${this.props.match.path}/:bioguideId(\\w+)`}
+            component={LegislatorView}
+          />
+        </div>
       </div>
     );
   }

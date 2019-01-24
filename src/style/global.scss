@@ -1,9 +1,8 @@
 /*
  * GLOBAL STYLES
  */
-@import "fonts";
-@import "colors";
-
+@import 'fonts';
+@import 'colors';
 
 * {
   box-sizing: border-box;
@@ -57,4 +56,8 @@ a {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+}
+
+.muted {
+  color: $color-grey-dark;
 }

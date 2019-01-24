@@ -1,0 +1,93 @@
+@import '../style/colors';
+
+.root {
+  section:not(:first-child) {
+    margin-top: 2rem;
+  }
+}
+
+.headshot {
+  margin-right: 1rem;
+  height: 9rem; // The height of three lines of h2
+  float: left;
+}
+
+.title {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+
+  @each $party, $color in $party-color-index {
+    .#{$party} {
+      color: $color;
+    }
+  }
+}
+
+.contact {
+  display: flex;
+  margin-top: 1rem;
+}
+
+.socialMedia {
+  flex: 1;
+  margin-left: 1rem;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fill, 52px);
+
+  a {
+    font-size: 1.25rem;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+.meta {
+  display: flex;
+  border-top: 1px solid $color-borders;
+
+  > div {
+    padding: 1rem 0 0;
+    border-right: 1px solid $color-borders;
+    margin-right: 2rem;
+    padding-right: 2rem;
+
+    &:last-child {
+      margin: 0;
+      border: none;
+      padding-right: 0;
+    }
+  }
+}
+
+.committees {
+  list-style: none;
+  padding-left: 0;
+
+  > li:not(:first-child) {
+    margin-top: 1rem;
+  }
+}
+
+.committeeName {
+  font-size: 110%;
+}
+
+.subcommittees {
+  padding-top: 0.25rem;
+  padding-left: calc(1rem + 3px);
+
+  li {
+    list-style: outside;
+    padding-left: 0.5rem;
+  }
+}
+
+.externalLinks {
+  flex: 1;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(min-content, 10rem));
+}

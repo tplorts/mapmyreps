@@ -188,11 +188,12 @@ export default class Legislator {
   }
 
   public get urlSegment() {
-    const urlName = this.fullName
-      .replace(PUNCTUATION_REGEX, ' ')
-      .trim()
-      .replace(/\s+/g, '-');
-    return `${this.bioguideId}-${urlName}`;
+    // const urlName = (this.name.last || '')
+    //   .replace(PUNCTUATION_REGEX, ' ')
+    //   .trim()
+    //   .replace(/\s+/g, '-');
+    // return `${this.bioguideId}-${urlName}`;
+    return this.bioguideId;
   }
 
   public get party() {
@@ -205,6 +206,10 @@ export default class Legislator {
 
   public get phone() {
     return this.presentTerm.phone;
+  }
+
+  public get sanitizedPhoneNumber() {
+    return (this.phone || '').replace(/\D/g, '');
   }
 
   public get office() {
