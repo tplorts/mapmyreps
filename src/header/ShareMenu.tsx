@@ -1,8 +1,7 @@
 import React, { PureComponent } from 'react';
-import { Link } from 'react-router-dom';
 import _ from 'lodash';
-import { shareMedia, SocialMedium, getShareUrl } from './utilities/sharing';
-import { classNames } from './utilities/styles';
+import { shareMedia, SocialMedium, getShareUrl } from '../utilities/sharing';
+import { classNames } from '../utilities/styles';
 import headerStyles from './MainHeader.module.scss';
 import styles from './ShareMenu.module.scss';
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import _ from 'lodash';
 import 'normalize.css';
-import MainHeader from './MainHeader';
+import MainHeader from './header/MainHeader';
 import NationalMap from './geography/nation/Map';
 import About from './About';
 import StateView from './congress/StateView';
