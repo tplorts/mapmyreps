@@ -4,7 +4,7 @@ import _ from 'lodash';
 import 'normalize.css';
 import MainHeader from './header/MainHeader';
 import NationalMap from './geography/nation/Map';
-import About from './About';
+import About from './about/About';
 import StateView from './congress/StateView';
 import styles from './App.module.scss';
 
