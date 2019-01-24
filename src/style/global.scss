@@ -3,6 +3,7 @@
  */
 @import 'fonts';
 @import 'colors';
+@import 'mixins';
 
 * {
   box-sizing: border-box;
@@ -53,11 +54,11 @@ a {
 }
 
 .container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
+  @extend %container;
 }
 
 .muted {
   color: $color-grey-dark;
 }
+
+@import './buttons';

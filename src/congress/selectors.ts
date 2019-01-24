@@ -1,8 +1,7 @@
 import _ from 'lodash';
 import { createSelector } from 'reselect';
 import * as Root from '../rootTypes';
-import { RouteProps as StateRouteProps } from './StateView';
-import { RouteProps as LegislatorRouteProps } from './LegislatorView';
+import { LegislatorRouteProps, StateRouteProps } from './routes';
 
 const getBranch = (root: Root.State) => root.congress;
 
@@ -29,7 +28,36 @@ function getLegislatorBioguideId(root: any, props: LegislatorRouteProps) {
   return _.toUpper(props.match.params.bioguideId);
 }
 
-export const getSelectedLegislator = createSelector(
+const getIndexOfSelectedLegislator = createSelector(
   [getLegislatorsForState, getLegislatorBioguideId],
-  (legislators, bioguideId) => _.find(legislators, { bioguideId })
+  (legislators, bioguideId) => _.findIndex(legislators, { bioguideId })
+);
+
+export const getSelectedLegislator = createSelector(
+  [getLegislatorsForState, getIndexOfSelectedLegislator],
+  (legislators, indexOfSelected) => _.get(legislators, indexOfSelected, null)
+);
+
+export const getNextLegislatorUrlSegment = createSelector(
+  [getLegislatorsForState, getIndexOfSelectedLegislator],
+  (legislators, indexOfSelected) => {
+    if (indexOfSelected >= legislators.length - 1) {
+      return null;
+    }
+
+    const indexOfNext = indexOfSelected === null ? 0 : indexOfSelected + 1;
+    return legislators[indexOfNext].urlSegment;
+  }
+);
+
+export const getPreviousLegislatorUrlSegment = createSelector(
+  [getLegislatorsForState, getIndexOfSelectedLegislator],
+  (legislators, indexOfSelected) => {
+    if (indexOfSelected <= 0) {
+      return null;
+    }
+
+    const indexOfNext = indexOfSelected === null ? 0 : indexOfSelected - 1;
+    return legislators[indexOfNext].urlSegment;
+  }
 );

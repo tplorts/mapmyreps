@@ -1,0 +1,85 @@
+@import './colors';
+
+$button-height: 3rem;
+$button-height-small: 2rem;
+
+// %button-text {
+//   color: white;
+//   // height: $button-height;
+//   // line-height: $button-height;
+//   font-size: 1rem;
+// }
+
+// %button-text-small {
+//   color: white;
+//   // height: $button-height-small;
+//   // line-height: $button-height-small;
+//   font-size: 0.75rem;
+// }
+
+.button:not(.icon-button),
+a.button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  background-color: $color-grey-dark;
+  padding: 0 1rem;
+  min-width: 1rem;
+  height: $button-height;
+  font-weight: 100;
+  color: white;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &.small {
+    font-size: 0.75rem;
+    height: $button-height-small;
+    padding: 0 1rem;
+  }
+
+  .svgIcon:not(:last-child) {
+    margin-right: 0.5rem;
+  }
+
+  svg {
+    fill: white;
+  }
+}
+
+.svg-icon-button {
+  cursor: pointer;
+  background-color: transparent;
+  outline: none;
+  border: none;
+  padding: 0;
+
+  svg {
+    fill: $color-grey-light;
+    transition: all 0.15s ease;
+  }
+
+  &:hover:not([disabled]),
+  &:hover:not(.disabled) {
+    svg {
+      fill: $color-black;
+    }
+  }
+
+  &[disabled],
+  &.disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+}
+
+.button {
+  @each $party, $color in $party-color-index {
+    &.#{$party} {
+      background-color: $color;
+    }
+  }
+}

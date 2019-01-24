@@ -1,25 +1,21 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { RouteComponentProps, withRouter, Link, Route } from 'react-router-dom';
+import { withRouter, Link, Route } from 'react-router-dom';
 import { getStateNameForPostal } from '../geography/USARegions';
 import * as Root from '../rootTypes';
+import Icon from '../Icon';
 import * as selectors from './selectors';
 import LegislatorGrid from './LegislatorGrid';
 import LegislatorView from './LegislatorView';
 import styles from './StateView.module.scss';
+import { StateRouteProps } from './routes';
 
-export interface RouteParams {
-  postal: string;
-}
-
-export type RouteProps = RouteComponentProps<RouteParams>;
-
-const mapStateToProps = (state: Root.State, ownProps: RouteProps) => ({
+const mapStateToProps = (state: Root.State, ownProps: StateRouteProps) => ({
   senators: selectors.getSenatorsForState(state, ownProps),
   representatives: selectors.getRepresentativesForState(state, ownProps),
 });
 
-type Props = RouteProps & ReturnType<typeof mapStateToProps>;
+type Props = StateRouteProps & ReturnType<typeof mapStateToProps>;
 
 class StateView extends PureComponent<Props> {
   get stateName() {
@@ -28,29 +24,33 @@ class StateView extends PureComponent<Props> {
 
   render() {
     return (
-      <div className={`container ${styles.root}`}>
-        <div className={styles.overview}>
-          <div className={styles.title}>
-            <Link to='/'>Back</Link>
-            <h4>{this.stateName}</h4>
+      <div className={styles.root}>
+        <div className={styles.container}>
+          <div className={styles.overview}>
+            <div className={styles.title}>
+              <Link to='/' className='svg-icon-button'>
+                <Icon name='map' />
+              </Link>
+              <h4>{this.stateName}</h4>
+            </div>
+            <div className={styles.map} />
+            <div className={styles.legislators}>
+              <LegislatorGrid
+                title='Senators'
+                legislators={this.props.senators}
+              />
+              <LegislatorGrid
+                title='Representatives'
+                legislators={this.props.representatives}
+              />
+            </div>
           </div>
-          <div className={styles.map} />
-          <div className={styles.legislators}>
-            <LegislatorGrid
-              title='Senators'
-              legislators={this.props.senators}
-            />
-            <LegislatorGrid
-              title='Representatives'
-              legislators={this.props.representatives}
+          <div className={styles.legislatorDetails}>
+            <Route
+              path={`${this.props.match.path}/:bioguideId(\\w+)`}
+              component={LegislatorView}
             />
           </div>
-        </div>
-        <div className={styles.legislatorDetails}>
-          <Route
-            path={`${this.props.match.path}/:bioguideId(\\w+)`}
-            component={LegislatorView}
-          />
         </div>
       </div>
     );

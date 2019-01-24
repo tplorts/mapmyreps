@@ -91,3 +91,24 @@
   grid-gap: 1rem;
   grid-template-columns: repeat(auto-fill, minmax(min-content, 10rem));
 }
+
+.legislatorNav > * {
+  position: absolute;
+  top: 50%;
+
+  &:first-child {
+    left: 0;
+    margin-left: 1rem;
+  }
+
+  &:last-child {
+    right: 0;
+    margin-right: 1rem;
+  }
+}
+
+@media (max-width: 1379px) {
+  .legislatorNav {
+    display: none;
+  }
+}

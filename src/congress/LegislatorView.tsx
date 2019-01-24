@@ -1,25 +1,30 @@
 import _ from 'lodash';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { RouteComponentProps, withRouter, Link, Route } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
+import Icon from '../Icon';
 import * as Root from '../rootTypes';
 import * as formatters from '../utilities/formatters';
-import { Committee, Legislator, Subcommittee } from './types';
-import * as selectors from './selectors';
-import { RouteParams as StateRouteParams } from './StateView';
+import { classNames } from '../utilities/styles';
 import styles from './LegislatorView.module.scss';
+import NextPrevLink from './NextPrevLink';
+import { LegislatorRouteProps } from './routes';
+import * as selectors from './selectors';
+import { Committee, Legislator, Subcommittee } from './types';
 
-export interface RouteParams extends StateRouteParams {
-  bioguideId: string;
-}
-
-export type RouteProps = RouteComponentProps<RouteParams>;
-
-const mapStateToProps = (state: Root.State, ownProps: RouteProps) => ({
+const mapStateToProps = (
+  state: Root.State,
+  ownProps: LegislatorRouteProps
+) => ({
   legislator: selectors.getSelectedLegislator(state, ownProps),
+  previousUrlSegment: selectors.getPreviousLegislatorUrlSegment(
+    state,
+    ownProps
+  ),
+  nextUrlSegment: selectors.getNextLegislatorUrlSegment(state, ownProps),
 });
 
-type Props = RouteProps & ReturnType<typeof mapStateToProps>;
+type Props = LegislatorRouteProps & ReturnType<typeof mapStateToProps>;
 
 class LegislatorView extends PureComponent<Props> {
   render() {
@@ -43,14 +48,13 @@ class LegislatorView extends PureComponent<Props> {
           </div>
           <div className={styles.contact}>
             {hasPhoneNumber && (
-              <div className='call'>
-                <a
-                  className='button-icon'
-                  href={`tel:${legislator.sanitizedPhoneNumber}`}
-                >
-                  <span>{phone}</span>
-                </a>
-              </div>
+              <a
+                className={`button ${party}`}
+                href={`tel:${legislator.sanitizedPhoneNumber}`}
+              >
+                <Icon name='phone' />
+                <span>{phone}</span>
+              </a>
             )}
             <div className={styles.socialMedia}>
               {_.map(
@@ -84,6 +88,16 @@ class LegislatorView extends PureComponent<Props> {
             {_.map(availableExternalLinks, this.renderExternalLink)}
           </div>
         </section>
+        <div className={styles.legislatorNav}>
+          <NextPrevLink
+            urlSegment={this.props.previousUrlSegment}
+            iconName='arrowLeft'
+          />
+          <NextPrevLink
+            urlSegment={this.props.nextUrlSegment}
+            iconName='arrowRight'
+          />
+        </div>
       </div>
     );
   }
@@ -91,14 +105,19 @@ class LegislatorView extends PureComponent<Props> {
   renderSocialMediumLink = (medium: any) => (
     <a
       key={medium.name}
-      className={`socicon-${medium.name}`}
+      className={`button socicon-${medium.name}`}
       target='_blank'
       href={medium.url}
     />
   );
 
   renderExternalLink = (link: any) => (
-    <a key={link.label} target='_blank' href={link.url}>
+    <a
+      key={link.label}
+      className='button small'
+      target='_blank'
+      href={link.url}
+    >
       {link.label}
     </a>
   );
