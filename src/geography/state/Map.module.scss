@@ -1,0 +1,40 @@
+@import '../../style/colors';
+
+.root {
+  display: flex;
+  justify-content: center;
+}
+
+// .svgRoot {
+//   transition: width, height 150ms;
+// }
+
+// .nation {
+//   transition: transform 150ms;
+// }
+
+// .stateBorders {
+//   fill: none;
+//   stroke: white;
+//   stroke-width: 2px;
+//   stroke-linejoin: round;
+//   stroke-linecap: round;
+//   pointer-events: none;
+// }
+
+
+// .state {
+//   fill: $color-black;
+//   opacity: 1;
+//   cursor: pointer;
+//   outline: none;
+//   transition: fill, opacity 200ms;
+
+//   &:hover {
+//     opacity: 0.7;
+//   }
+
+//   .selected & {
+//     opacity: 0.4;
+//   }
+// }

@@ -4,6 +4,7 @@ import { withRouter, Link, Route } from 'react-router-dom';
 import { getStateNameForPostal } from '../geography/USARegions';
 import * as Root from '../rootTypes';
 import Icon from '../Icon';
+import StateMap from '../geography/state/Map';
 import * as selectors from './selectors';
 import LegislatorGrid from './LegislatorGrid';
 import LegislatorView from './LegislatorView';
@@ -33,7 +34,9 @@ class StateView extends PureComponent<Props> {
               </Link>
               <h4>{this.stateName}</h4>
             </div>
-            <div className={styles.map} />
+            <div className={styles.map}>
+              <StateMap postalCode={this.props.match.params.postal} />
+            </div>
             <div className={styles.legislators}>
               <LegislatorGrid
                 title='Senators'
