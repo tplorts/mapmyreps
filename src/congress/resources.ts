@@ -1,6 +1,6 @@
 import _ from 'lodash';
 
-const CONGRESS_BASE_URL = 'http://data.mapmyreps.us/congress';
+const CONGRESS_BASE_URL = 'http://dev-data.mapmyreps.us/congress';
 
 const resourceNameIndex = {
   legislators: 'legislators-current',
