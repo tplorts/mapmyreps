@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { NavLink, RouteComponentProps, withRouter } from 'react-router-dom';
 import * as Root from '../../rootTypes';
 import * as selectors from './selectors';
-import { StateFeature } from './types';
+import { StateFeature } from '../types';
 import { MAP_ELEMENT_ID } from './constants';
 import styles from './Map.module.scss';
 

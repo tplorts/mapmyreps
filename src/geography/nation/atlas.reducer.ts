@@ -1,7 +1,7 @@
 import { ActionType } from 'typesafe-actions';
 import { DeepReadonly } from 'utility-types';
 import * as actions from './actions';
-import { NationalAtlas } from './types';
+import { NationalAtlas } from '../types';
 
 export type State = DeepReadonly<NationalAtlas>;
 export type Action = ActionType<typeof actions>;

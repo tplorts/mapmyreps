@@ -1,4 +1,4 @@
-import { USAState } from '../USARegions';
+import { USAState } from './USARegions';
 
 export interface XYPoint {
   x: number;

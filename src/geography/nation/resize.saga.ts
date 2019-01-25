@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { Action } from 'redux';
 import { takeLatest, all, call, select, put } from 'redux-saga/effects';
 import { VIEWPORT_DID_RESIZE } from '../../viewport/actions';
-import { NationalAtlas } from './types';
+import { NationalAtlas } from '../types';
 import { MAP_ELEMENT_ID } from './constants';
 import * as selectors from './selectors';
 import * as actions from './actions';

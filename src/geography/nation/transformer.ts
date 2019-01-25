@@ -3,7 +3,7 @@ import { Feature } from 'geojson';
 import _ from 'lodash';
 import { feature, mesh, UsAtlas } from 'topojson';
 import { getStateByFIPS } from '../USARegions';
-import { StateFeature, XYBoundingBox, XYPoint, XYSize } from './types';
+import { StateFeature, XYBoundingBox, XYPoint, XYSize } from '../types';
 
 export class NationalAtlasTransformer {
   private topology: UsAtlas;

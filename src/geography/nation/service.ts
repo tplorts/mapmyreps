@@ -1,7 +1,7 @@
 import { UsAtlas } from 'topojson';
 import { fetchJSON } from '../../utilities/fetchJSON';
 import { NationalAtlasTransformer } from './transformer';
-import { NationalAtlas } from './types';
+import { NationalAtlas } from '../types';
 
 const ATLAS_URL = 'http://data.mapmyreps.us/geography/us-atlas-10m.json';
 
