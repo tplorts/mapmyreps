@@ -1,17 +1,8 @@
 @import '../style/colors';
-@import '../style/measurements';
 @import '../style/mixins';
 
 .root {
-  position: fixed;
-  z-index: 1;
-  overflow-y: scroll;
-  top: $navbar-height;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 2rem;
-  background-color: rgba($color-background, 0.95);
+  @extend %subpage;
 }
 
 .container {

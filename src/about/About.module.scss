@@ -1,5 +1,8 @@
-.about {
-  padding: 2rem;
+@import '../style/colors';
+@import '../style/mixins';
+
+.root {
+  @extend %subpage;
   
   section {
     margin: 2rem 0;

@@ -1,7 +1,21 @@
+@import './colors';
+@import './measurements';
 
 %container {
   width: 100%;
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto;
+}
+
+%subpage {
+  position: fixed;
+  z-index: 1;
+  overflow-y: scroll;
+  top: $navbar-height;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2rem;
+  background-color: rgba($color-background, 0.95);
 }
