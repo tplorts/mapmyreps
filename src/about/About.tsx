@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
 import styles from './About.module.scss';
+import Icon from '../Icon';
 
 interface Author {
   role: string;
@@ -35,7 +36,7 @@ const About = () => (
   <div className={styles.root}>
     <div className='container'>
       <Link className='svg-icon-button' to='/'>
-        Back
+        <Icon name='map' />
       </Link>
       <section className='options'>
         <h2>Advanced Options</h2>
