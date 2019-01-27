@@ -2,7 +2,7 @@ import { GeoPath, geoPath } from 'd3-geo';
 import { Feature } from 'geojson';
 import _ from 'lodash';
 import { feature, mesh, UsAtlas } from 'topojson';
-import { getStateByFIPS } from '../USARegions';
+import { getStateByFIPS } from '../AmericanStates';
 import { StateFeature, XYBoundingBox, XYPoint, XYSize } from '../types';
 
 export class NationalAtlasTransformer {

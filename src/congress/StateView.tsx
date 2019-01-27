@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Link, Route } from 'react-router-dom';
-import { getStateNameForPostal } from '../geography/USARegions';
+import { getStateNameForPostal } from '../geography/AmericanStates';
 import * as Root from '../rootTypes';
 import Icon from '../Icon';
 import StateMap from '../geography/state/Map';
@@ -35,7 +35,10 @@ class StateView extends PureComponent<Props> {
               <h4>{this.stateName}</h4>
             </div>
             <div className={styles.map}>
-              <StateMap postalCode={this.props.match.params.postal} />
+              <StateMap
+                postalCode={this.props.match.params.postal}
+                representatives={this.props.representatives}
+              />
             </div>
             <div className={styles.legislators}>
               <LegislatorGrid

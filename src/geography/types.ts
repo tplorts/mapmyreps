@@ -1,4 +1,13 @@
-import { USAState } from './USARegions';
+export interface AmericanRegion {
+  name: string;
+  status: string;
+  fips: number;
+  postal?: string;
+}
+
+export interface AmericanState extends AmericanRegion {
+  postal: string;
+}
 
 export interface XYPoint {
   x: number;
@@ -10,12 +19,16 @@ export interface XYSize {
   height: number;
 }
 
+export interface ViewSize extends XYSize {
+  padding: number;
+}
+
 export interface XYBoundingBox {
   bottomLeft: XYPoint;
   topRight: XYPoint;
 }
 
-export interface StateFeature extends USAState {
+export interface StateFeature extends AmericanState {
   pathString: string;
   centroid: XYPoint;
   bounds: XYBoundingBox;

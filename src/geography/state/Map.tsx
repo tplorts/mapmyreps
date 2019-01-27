@@ -3,13 +3,17 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, RouteComponentProps, withRouter } from 'react-router-dom';
 import * as Root from '../../rootTypes';
-import * as selectors from './selectors';
+import * as formatters from '../../utilities/formatters';
+import { classNames } from '../../utilities/styles';
+import { ViewSize } from '../types';
+import fetchStateDistricts from './fetchDistricts';
 import styles from './Map.module.scss';
-import { StateFeature } from '../types';
-import { StateMapProps } from './Props';
+import * as selectors from './selectors';
+import * as svgTransforms from './svgTransforms';
 import SvgDropShadow from './SvgDropShadow';
+import { ExtendedDistrictFeature, StateMapProps } from './types';
 
-const stateMapOptions = {
+const viewSize: ViewSize = {
   width: 320,
   height: 320,
   padding: 16,
@@ -18,6 +22,7 @@ const stateMapOptions = {
 const mapStateToProps = (root: Root.State, ownProps: StateMapProps) => {
   return {
     stateFeature: selectors.getStateFeature(root, ownProps),
+    districtIndex: selectors.getDistrictLinkIndex(root, ownProps),
   };
 };
 
@@ -25,70 +30,104 @@ type Props = RouteComponentProps &
   ReturnType<typeof mapStateToProps> &
   StateMapProps;
 
-class StateMap extends PureComponent<Props> {
-  render() {
-    const { stateFeature } = this.props;
-    if (_.isNil(stateFeature)) {
-      return null;
-    }
+type ComponentState = {
+  loaded: boolean;
+  districtFeatures: ExtendedDistrictFeature[];
+  districtBorders: string;
+};
 
+class StateMap extends PureComponent<Props, ComponentState> {
+  state = {
+    loaded: false,
+    districtFeatures: [],
+    districtBorders: '',
+  };
+
+  componentDidMount() {
+    this.fetchDistrictMap();
+  }
+
+  async fetchDistrictMap() {
+    const { features, borders } = await fetchStateDistricts(
+      this.props.postalCode,
+      viewSize
+    );
+
+    this.setState({
+      loaded: true,
+      districtFeatures: features,
+      districtBorders: borders,
+    });
+  }
+
+  render() {
     return (
       <div className={styles.root}>
         <svg
-          width={stateMapOptions.width}
-          height={stateMapOptions.height}
-          className={styles.svgRoot}
+          width={viewSize.width}
+          height={viewSize.height}
+          className={classNames([
+            styles.svgRoot,
+            this.state.loaded && styles.loaded,
+          ])}
         >
           <defs>
             <SvgDropShadow filterId='stateShadow' />
           </defs>
-          <path
-            filter='url(#stateShadow)'
-            d={stateFeature.pathString}
-            transform={this.svgTransformInitial}
-          />
+          <g filter='url(#stateShadow)'>
+            {this.state.loaded
+              ? this.renderDistricts()
+              : this.renderInitialStatePath()}
+          </g>
         </svg>
       </div>
     );
   }
 
-  renderStatePath = (state: StateFeature) => (
-    <NavLink
-      to={`/${state.postal}`}
-      key={state.postal}
-      activeClassName={styles.selected}
-    >
-      <path className={styles.state} d={state.pathString} />
-    </NavLink>
-  );
+  renderInitialStatePath() {
+    const { stateFeature } = this.props;
+
+    return stateFeature ? (
+      <path d={stateFeature.pathString} transform={this.svgTransformInitial} />
+    ) : null;
+  }
+
+  renderDistricts() {
+    return (
+      <g>
+        <g>{_.map(this.state.districtFeatures, this.renderDistrictFeature)}</g>
+        <path d={this.state.districtBorders} className={styles.borders} />
+      </g>
+    );
+  }
+
+  renderDistrictFeature = (feature: ExtendedDistrictFeature) => {
+    const { districtId } = feature;
+    const rep = this.props.districtIndex[districtId];
+    const relativePath = rep ? `/${rep.urlSegment}` : '';
+
+    return (
+      <NavLink
+        to={`${this.props.match.url}${relativePath}`}
+        key={districtId}
+        activeClassName={styles.selected}
+      >
+        <g>
+          <title>
+            {formatters.district(districtId)} District
+            {rep ? '' : ' (presently vacant)'}
+          </title>
+          <path
+            className={classNames([styles.district, rep && styles[rep.party]])}
+            d={feature.path}
+          />
+        </g>
+      </NavLink>
+    );
+  };
 
   public get svgTransformInitial(): string {
-    const { stateFeature } = this.props;
-    if (_.isNil(stateFeature)) {
-      return '';
-    }
-
-    const { topRight, bottomLeft } = stateFeature.bounds;
-    const { x: x0, y: y0 } = bottomLeft;
-    const { x: x1, y: y1 } = topRight;
-    const [x, y] = [(x0 + x1) / 2, (y0 + y1) / 2];
-    const stateWidth = x1 - x0;
-    const stateHeight = y1 - y0;
-    const { width, height, padding } = stateMapOptions;
-    const mapCenterX = width / 2;
-    const mapCenterY = height / 2;
-    const mapWidth = width - 2 * padding;
-    const mapHeight = height - 2 * padding;
-    const xScale = mapWidth / stateWidth;
-    const yScale = mapHeight / stateHeight;
-    const choose = xScale > 1 || yScale > 1 ? Math.min : Math.max;
-    const scale = choose(xScale, yScale);
-
-    return [
-      `translate(${mapCenterX}, ${mapCenterY})`,
-      `scale(${scale})`,
-      `translate(${-x}, ${-y})`,
-    ].join(' ');
+    return svgTransforms.stateFromNation(this.props.stateFeature, viewSize);
   }
 }
 

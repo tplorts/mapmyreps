@@ -31,7 +31,6 @@
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  margin-bottom: 1.5rem;
 
   a {
     margin-top: 5px;
@@ -41,6 +40,7 @@
     flex: 1;
     font-size: 1.5rem;
     margin-left: 2rem;
+    margin-bottom: 0;
   }
 }
 

@@ -135,7 +135,7 @@ export default class Legislator {
     this.leadershipRoles = source.leadership_roles;
     this.socialMedia = socialMedia || {};
     this.terms = source.terms;
-    this.presentStatePostalCode = _.toLower(this.presentTerm.state);
+    this.presentStatePostalCode = this.presentTerm.state;
 
     this.committees = _.filter(
       committees,

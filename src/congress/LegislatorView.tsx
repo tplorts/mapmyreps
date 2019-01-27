@@ -5,7 +5,6 @@ import { Link, withRouter } from 'react-router-dom';
 import Icon from '../Icon';
 import * as Root from '../rootTypes';
 import * as formatters from '../utilities/formatters';
-import { classNames } from '../utilities/styles';
 import styles from './LegislatorView.module.scss';
 import NextPrevLink from './NextPrevLink';
 import { LegislatorRouteProps } from './routes';

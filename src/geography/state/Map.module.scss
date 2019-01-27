@@ -5,36 +5,60 @@
   justify-content: center;
 }
 
-// .svgRoot {
-//   transition: width, height 150ms;
-// }
+.svgRoot {
+  filter: blur(10px);
+  transition: filter 0.5s;
 
-// .nation {
-//   transition: transform 150ms;
-// }
+  &.loaded {
+    filter: none;
+  }
+}
 
-// .stateBorders {
-//   fill: none;
-//   stroke: white;
-//   stroke-width: 2px;
-//   stroke-linejoin: round;
-//   stroke-linecap: round;
-//   pointer-events: none;
-// }
+.district {
+  opacity: 1;
+  cursor: pointer;
+  outline: none;
+  transition: fill 0.15s;
+  fill: rgba($color-black, 0.5);
+  animation-duration: 1s;
 
+  &:hover {
+    opacity: 0.75;
+  }
+}
 
-// .state {
-//   fill: $color-black;
-//   opacity: 1;
-//   cursor: pointer;
-//   outline: none;
-//   transition: fill, opacity 200ms;
+@each $party, $party-color in $party-color-index {
+  $selected-color: lighten($party-color, 25%);
 
-//   &:hover {
-//     opacity: 0.7;
-//   }
+  .district.#{$party} {
+    fill: $party-color;
 
-//   .selected & {
-//     opacity: 0.4;
-//   }
-// }
+    .selected & {
+      animation-name: flash-#{$party};
+      fill: $selected-color;
+    }
+  }
+
+  @keyframes flash-#{$party} {
+    from {
+      fill: $party-color;
+    }
+
+    10% {
+      fill: white;
+    }
+
+    to {
+      fill: $selected-color;
+    }
+  }
+}
+
+.borders {
+  fill: none;
+  stroke: $color-borders;
+  stroke-width: 0.5px;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  pointer-events: none;
+}
