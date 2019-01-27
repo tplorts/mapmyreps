@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import _ from 'lodash';
 import 'normalize.css';
 import MainHeader from './header/MainHeader';
@@ -14,8 +14,11 @@ const App = () => (
     <div className={styles.content}>
       <NationalMap />
     </div>
-    <Route path='/about' exact component={About} />
-    <Route path='/:postal([A-Za-z]{2})' component={StateView} />
+    <Switch>
+      <Route path='/about' exact component={About} />
+      <Route path='/:postal([A-Za-z]{2})' component={StateView} />
+      <Redirect to='' />
+    </Switch>
   </div>
 );
 

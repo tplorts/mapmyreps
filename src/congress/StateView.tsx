@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Link, Route } from 'react-router-dom';
+import { withRouter, Link, Route, Redirect, Switch } from 'react-router-dom';
 import { getStateNameForPostal } from '../geography/AmericanStates';
 import * as Root from '../rootTypes';
 import Icon from '../Icon';
@@ -52,10 +52,13 @@ class StateView extends PureComponent<Props> {
             </div>
           </div>
           <div className={styles.legislatorDetails}>
-            <Route
-              path={`${this.props.match.path}/:bioguideId(\\w+)`}
-              component={LegislatorView}
-            />
+            <Switch>
+              <Route
+                path={`${this.props.match.path}/:bioguideId(\\w+)`}
+                component={LegislatorView}
+              />
+              <Redirect to={this.props.match.path} />
+            </Switch>
           </div>
         </div>
       </div>
