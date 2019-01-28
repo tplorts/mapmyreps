@@ -131,7 +131,7 @@ class StateMap extends PureComponent<Props, ComponentState> {
     const { stateFeature } = this.props;
 
     return stateFeature ? (
-      <path d={stateFeature.pathString} transform={this.svgTransformInitial} />
+      <path d={stateFeature.path} transform={this.svgTransformInitial} />
     ) : null;
   }
 

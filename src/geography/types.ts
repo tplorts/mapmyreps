@@ -31,7 +31,7 @@ export interface XYBoundingBox {
 }
 
 export interface StateFeature extends AmericanState {
-  pathString: string;
+  path: string;
   centroid: XYPoint;
   bounds: XYBoundingBox;
 }

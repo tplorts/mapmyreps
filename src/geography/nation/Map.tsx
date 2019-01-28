@@ -55,7 +55,7 @@ class NationalMap extends PureComponent<Props> {
       key={state.postal}
       activeClassName={styles.selected}
     >
-      <path className={styles.state} d={state.pathString} />
+      <path className={styles.state} d={state.path} />
     </NavLink>
   );
 }

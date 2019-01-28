@@ -35,7 +35,7 @@ export class NationalAtlasTransformer {
 
   transformStateFeature = (feature: Feature) => ({
     ...getStateByFIPS(_.toNumber(feature.id)),
-    pathString: this.getPathString(feature),
+    path: this.getPathString(feature),
     centroid: this.getFeatureCentroid(feature),
     bounds: this.getFeatureBounds(feature),
   });
