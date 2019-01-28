@@ -1,6 +1,7 @@
 import { fetchJSON } from '../../utilities/fetchJSON';
-import { ViewSize } from '../types';
 import { getStateByPostal } from '../AmericanStates';
+import { GEOGRAPHY_DATA_URL } from '../constants';
+import { ViewSize } from '../types';
 import transformDistricts from './transformDistricts';
 
 export default async function fetchStateDistricts(
@@ -11,9 +12,8 @@ export default async function fetchStateDistricts(
     .fips.toString()
     .padStart(2, '0');
 
-  const districtsTopology = await fetchJSON(
-    `http://dev-data.mapmyreps.us/geography/districts/${fips}.json`
-  );
+  const url = `${GEOGRAPHY_DATA_URL}/districts/${fips}.json`;
+  const districtsTopology = await fetchJSON(url);
 
   return transformDistricts(districtsTopology, statePostalCode, viewSize);
 }

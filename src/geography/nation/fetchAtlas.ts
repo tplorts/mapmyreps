@@ -1,11 +1,12 @@
 import { UsAtlas } from 'topojson';
 import { fetchJSON } from '../../utilities/fetchJSON';
-import { NationalAtlasTransformer } from './transformer';
+import { GEOGRAPHY_DATA_URL } from '../constants';
 import { NationalAtlas } from '../types';
+import { NationalAtlasTransformer } from './transformer';
 
-const ATLAS_URL = 'http://data.mapmyreps.us/geography/us-atlas-10m.json';
+const ATLAS_URL = `${GEOGRAPHY_DATA_URL}/us-atlas-10m.json`;
 
-export async function getNationalAtlas(): Promise<NationalAtlas> {
+export default async function fetchNationalAtlas(): Promise<NationalAtlas> {
   const rawAtlas = await fetchJSON<UsAtlas>(ATLAS_URL);
 
   const transformer = new NationalAtlasTransformer(rawAtlas);
