@@ -12,7 +12,6 @@ import * as selectors from './selectors';
 import * as svgTransforms from './svgTransforms';
 import SvgDropShadow from './SvgDropShadow';
 import { ExtendedDistrictFeature, StateMapProps } from './types';
-import { getBoundingBoxSize, getBoundingBoxCenter } from '../utilities';
 
 const viewSize: ViewSize = {
   width: 320,
@@ -63,6 +62,26 @@ class StateMap extends PureComponent<Props, ComponentState> {
     });
   }
 
+  get svgTransformInitial() {
+    return svgTransforms.stateFromNation(this.props.stateFeature, viewSize);
+  }
+
+  zoomToDistrict = (feature: ExtendedDistrictFeature) => {
+    this.setState({
+      svgTransform: svgTransforms.districtZoom(feature, viewSize),
+    });
+  };
+
+  resetZoom = () => {
+    if (this.state.svgTransform) {
+      this.setState({ svgTransform: '' });
+    }
+  };
+
+  onSelectDistrict = (feature: ExtendedDistrictFeature) => {
+    this.zoomToDistrict(feature);
+  };
+
   render() {
     return (
       <div className={styles.root}>
@@ -93,18 +112,6 @@ class StateMap extends PureComponent<Props, ComponentState> {
       </div>
     );
   }
-
-  zoomToDistrict = (feature: ExtendedDistrictFeature) => {
-    this.setState({
-      svgTransform: svgTransforms.districtZoom(feature, viewSize),
-    });
-  };
-
-  resetZoom = () => {
-    if (this.state.svgTransform) {
-      this.setState({ svgTransform: '' });
-    }
-  };
 
   renderInitialStatePath() {
     const { stateFeature } = this.props;
@@ -148,15 +155,6 @@ class StateMap extends PureComponent<Props, ComponentState> {
       </NavLink>
     );
   };
-
-  onSelectDistrict = (feature: ExtendedDistrictFeature) => {
-    // this.resetZoom();
-    this.zoomToDistrict(feature);
-  };
-
-  public get svgTransformInitial(): string {
-    return svgTransforms.stateFromNation(this.props.stateFeature, viewSize);
-  }
 }
 
 const reduxConnected = connect(mapStateToProps);
