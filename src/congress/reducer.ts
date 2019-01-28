@@ -1,9 +1,15 @@
-
 import { combineReducers } from 'redux';
-import legislators from './legislators.reducer';
-import partyStats from './partyStats.reducer';
+import { createBasicSetValueReducer } from '../utilities/createReducer';
+import * as actions from './actions';
+import { StateLegislatorsIndex, StatePartyStatsIndex } from './types';
 
 export default combineReducers({
-  legislators,
-  partyStats,
+  legislators: createBasicSetValueReducer<StateLegislatorsIndex>(
+    {},
+    actions.SET_LEGISLATORS
+  ),
+  partyStats: createBasicSetValueReducer<StatePartyStatsIndex>(
+    {},
+    actions.SET_PARTY_STATS
+  ),
 });
