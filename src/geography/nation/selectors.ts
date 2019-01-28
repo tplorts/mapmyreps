@@ -2,9 +2,10 @@ import chroma from 'chroma-js';
 import _ from 'lodash';
 import { createSelector } from 'reselect';
 import { getPartyStatsIndex } from '../../congress/selectors';
+import { PartyCountIndex } from '../../congress/types';
 import * as Root from '../../rootTypes';
 import { partyColorIndex } from '../../style/colors';
-import { PartyCountIndex } from '../../congress/types';
+import { getColoringChamber, getColorSpace } from './settings/selectors';
 
 const getBranch = (state: Root.State) => state.geography.nation;
 
@@ -13,18 +14,16 @@ export const getAtlas = (state: Root.State) => getBranch(state).atlas;
 export const getMapScaleFactor = (state: Root.State) =>
   getBranch(state).scaleFactor;
 
-const getStateColorMode = () => 'combined';
-
 export const getStateColorIndex = createSelector(
-  [getPartyStatsIndex, getStateColorMode],
-  (partyStats, colorMode) => {
+  [getPartyStatsIndex, getColoringChamber, getColorSpace],
+  (partyStats, chamber, colorSpace) => {
     return _.mapValues(partyStats, statePartyStats =>
-      getColorMix(statePartyStats[colorMode])
+      getColorMix(statePartyStats[chamber], colorSpace)
     );
   }
 );
 
-function getColorMix(partyCounts: PartyCountIndex) {
+function getColorMix(partyCounts: PartyCountIndex, colorSpace: string) {
   const weightedColors = _.chain(partyColorIndex)
     .toPairs()
     .map(([party, partyColor]) => {
@@ -35,6 +34,6 @@ function getColorMix(partyCounts: PartyCountIndex) {
     .value();
 
   return weightedColors.length
-    ? chroma.average(weightedColors, 'lrgb' as any).css()
+    ? chroma.average(weightedColors, colorSpace as any).css()
     : undefined;
 }
