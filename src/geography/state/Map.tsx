@@ -95,30 +95,9 @@ class StateMap extends PureComponent<Props, ComponentState> {
   }
 
   zoomToDistrict = (feature: ExtendedDistrictFeature) => {
-    const { boundingBox } = feature;
-
-    const districtCenter = getBoundingBoxCenter(boundingBox);
-    const districtSize = getBoundingBoxSize(boundingBox);
-
-    const scaleFactor = Math.sqrt(
-      Math.min(
-        viewSize.width / districtSize.width,
-        viewSize.height / districtSize.height
-      )
-    );
-
-    const offset = {
-      x: viewSize.width / 2 - districtCenter.x,
-      y: viewSize.height / 2 - districtCenter.y,
-    };
-
-    const svgTransform = [
-      // `translate(${-districtCenter.x}, ${-districtCenter.y})`,
-      `scale(${scaleFactor})`,
-      `translate(${offset.x}, ${offset.y})`,
-    ].join(' ');
-
-    this.setState({ svgTransform });
+    this.setState({
+      svgTransform: svgTransforms.districtZoom(feature, viewSize),
+    });
   };
 
   resetZoom = () => {
