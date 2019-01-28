@@ -2,12 +2,19 @@
 
 .root {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+}
+
+.controls {
+  position: relative;
+  z-index: 1;
 }
 
 .svgRoot {
   filter: blur(10px);
-  transition: filter 0.5s;
+  transition: filter, transform 0.5s;
 
   &.loaded {
     filter: none;

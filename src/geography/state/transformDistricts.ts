@@ -2,6 +2,7 @@ import { GeoPath, geoPath } from 'd3-geo';
 import _ from 'lodash';
 import { feature, mesh } from 'topojson';
 import { ViewSize } from '../types';
+import { bboxToXYBoundingBox } from '../utilities';
 import { getProjection } from './projectionPlanes';
 import { CongressionalDistrictsTopology } from './types';
 
@@ -22,6 +23,7 @@ export default function transformDistricts(
       ...districtFeature,
       districtId: _.toNumber(districtFeature.properties.CD115FP),
       path: path(districtFeature) || '',
+      boundingBox: bboxToXYBoundingBox(path.bounds(districtFeature)),
     })),
   };
 }

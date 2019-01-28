@@ -1,4 +1,5 @@
 import { StateFeature, ViewSize } from '../types';
+import { getBoundingBoxSize, getBoundingBoxCenter } from '../utilities';
 
 export function stateFromNation(
   stateFeature?: StateFeature,
@@ -8,17 +9,9 @@ export function stateFromNation(
     return '';
   }
 
-  const { topRight, bottomLeft } = stateFeature.bounds;
-  const { x: x0, y: y0 } = bottomLeft;
-  const { x: x1, y: y1 } = topRight;
-  const featureCenter = {
-    x: (x0 + x1) / 2,
-    y: (y0 + y1) / 2,
-  };
-  const featureSize = {
-    width: x1 - x0,
-    height: y1 - y0,
-  };
+  const featureCenter = getBoundingBoxCenter(stateFeature.bounds);
+  const featureSize = getBoundingBoxSize(stateFeature.bounds);
+
   const viewCenter = {
     x: viewSize.width / 2,
     y: viewSize.height / 2,

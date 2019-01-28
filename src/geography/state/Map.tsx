@@ -12,6 +12,7 @@ import * as selectors from './selectors';
 import * as svgTransforms from './svgTransforms';
 import SvgDropShadow from './SvgDropShadow';
 import { ExtendedDistrictFeature, StateMapProps } from './types';
+import { getBoundingBoxSize, getBoundingBoxCenter } from '../utilities';
 
 const viewSize: ViewSize = {
   width: 320,
@@ -34,6 +35,7 @@ type ComponentState = {
   loaded: boolean;
   districtFeatures: ExtendedDistrictFeature[];
   districtBorders: string;
+  svgTransform: string;
 };
 
 class StateMap extends PureComponent<Props, ComponentState> {
@@ -41,6 +43,7 @@ class StateMap extends PureComponent<Props, ComponentState> {
     loaded: false,
     districtFeatures: [],
     districtBorders: '',
+    svgTransform: '',
   };
 
   componentDidMount() {
@@ -64,6 +67,7 @@ class StateMap extends PureComponent<Props, ComponentState> {
     return (
       <div className={styles.root}>
         <svg
+          transform={this.state.svgTransform}
           width={viewSize.width}
           height={viewSize.height}
           className={classNames([
@@ -80,9 +84,48 @@ class StateMap extends PureComponent<Props, ComponentState> {
               : this.renderInitialStatePath()}
           </g>
         </svg>
+        <div className={styles.controls}>
+          {/* <button onClick={this.zoomToDistrict}>+</button> */}
+          {!!this.state.svgTransform && (
+            <button onClick={this.resetZoom}>reset zoom</button>
+          )}
+        </div>
       </div>
     );
   }
+
+  zoomToDistrict = (feature: ExtendedDistrictFeature) => {
+    const { boundingBox } = feature;
+
+    const districtCenter = getBoundingBoxCenter(boundingBox);
+    const districtSize = getBoundingBoxSize(boundingBox);
+
+    const scaleFactor = Math.sqrt(
+      Math.min(
+        viewSize.width / districtSize.width,
+        viewSize.height / districtSize.height
+      )
+    );
+
+    const offset = {
+      x: viewSize.width / 2 - districtCenter.x,
+      y: viewSize.height / 2 - districtCenter.y,
+    };
+
+    const svgTransform = [
+      // `translate(${-districtCenter.x}, ${-districtCenter.y})`,
+      `scale(${scaleFactor})`,
+      `translate(${offset.x}, ${offset.y})`,
+    ].join(' ');
+
+    this.setState({ svgTransform });
+  };
+
+  resetZoom = () => {
+    if (this.state.svgTransform) {
+      this.setState({ svgTransform: '' });
+    }
+  };
 
   renderInitialStatePath() {
     const { stateFeature } = this.props;
@@ -120,10 +163,16 @@ class StateMap extends PureComponent<Props, ComponentState> {
           <path
             className={classNames([styles.district, rep && styles[rep.party]])}
             d={feature.path}
+            onClick={() => this.onSelectDistrict(feature)}
           />
         </g>
       </NavLink>
     );
+  };
+
+  onSelectDistrict = (feature: ExtendedDistrictFeature) => {
+    // this.resetZoom();
+    this.zoomToDistrict(feature);
   };
 
   public get svgTransformInitial(): string {

@@ -23,9 +23,11 @@ export interface ViewSize extends XYSize {
   padding: number;
 }
 
+export type TopoJSONBBox = [[number, number], [number, number]];
+
 export interface XYBoundingBox {
-  bottomLeft: XYPoint;
-  topRight: XYPoint;
+  min: XYPoint;
+  max: XYPoint;
 }
 
 export interface StateFeature extends AmericanState {

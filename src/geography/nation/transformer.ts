@@ -72,8 +72,8 @@ export class NationalAtlasTransformer {
     const [[x0, y0], [x1, y1]] = this.path.bounds(feature);
 
     return {
-      bottomLeft: { x: x0, y: y0 },
-      topRight: { x: x1, y: y1 },
+      min: { x: x0, y: y0 },
+      max: { x: x1, y: y1 },
     };
   };
 }
