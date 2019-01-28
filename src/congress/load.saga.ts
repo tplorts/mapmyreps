@@ -1,8 +1,9 @@
 import _ from 'lodash';
-import { all, put } from 'redux-saga/effects';
+import { all, call, put } from 'redux-saga/effects';
 import { fetchJSON } from '../utilities/fetchJSON';
 import * as actions from './actions';
 import assembleLegislators from './assembleLegislators';
+import assemblePartyStats from './assemblePartyStats';
 import { CONGRESS_DATA_URL } from './constants';
 
 export default function* loadCongressSaga() {
@@ -22,11 +23,21 @@ export default function* loadCongressSaga() {
 
   // const transformationStart = Date.now();
 
-  const legislatorsGroupedByState = assembleLegislators(congressData);
+  const legislatorsGroupedByState = yield call(
+    assembleLegislators,
+    congressData
+  );
 
   // const transformationEnd = Date.now();
   // const duration = transformationEnd - transformationStart;
   // console.log(`transformation duration: ${duration}`);
 
   yield put(actions.setLegislators(legislatorsGroupedByState));
+
+  const partyStatsByState = yield call(
+    assemblePartyStats,
+    legislatorsGroupedByState
+  );
+
+  yield put(actions.setPartyStats(partyStatsByState));
 }

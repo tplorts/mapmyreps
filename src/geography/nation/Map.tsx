@@ -3,20 +3,22 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, RouteComponentProps, withRouter } from 'react-router-dom';
 import * as Root from '../../rootTypes';
-import * as selectors from './selectors';
+import { classNames } from '../../utilities/styles';
 import { StateFeature } from '../types';
 import { MAP_ELEMENT_ID } from './constants';
 import styles from './Map.module.scss';
+import * as selectors from './selectors';
 
-const mapStateToProps = (state: Root.State) => {
-  const atlas = selectors.getAtlas(state);
-  const scaleFactor = selectors.getMapScaleFactor(state);
+const mapStateToProps = (root: Root.State) => {
+  const atlas = selectors.getAtlas(root);
+  const scaleFactor = selectors.getMapScaleFactor(root);
 
   return {
     atlas,
     scaleFactor,
     svgWidth: atlas.size.width * scaleFactor,
     svgHeight: atlas.size.height * scaleFactor,
+    stateColors: selectors.getStateColorIndex(root),
   };
 };
 
@@ -30,6 +32,10 @@ class NationalMap extends PureComponent<Props> {
       `scale(${this.props.scaleFactor})`,
       `translate(${offset.x} ${offset.y})`,
     ].join(' ');
+  }
+
+  private getStateColor(statePostalCode: string) {
+    return this.props.stateColors[statePostalCode];
   }
 
   render = () => (
@@ -55,7 +61,11 @@ class NationalMap extends PureComponent<Props> {
       key={state.postal}
       activeClassName={styles.selected}
     >
-      <path className={styles.state} d={state.path} />
+      <path
+        className={classNames([styles.state])}
+        style={{ fill: this.getStateColor(state.postal) }}
+        d={state.path}
+      />
     </NavLink>
   );
 }

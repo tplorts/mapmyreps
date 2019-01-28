@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@types/chroma-js": "^1.4.1",
     "@types/d3-geo": "^1.11.0",
     "@types/jest": "23.3.12",
     "@types/lodash": "^4.14.119",
@@ -14,6 +15,7 @@
     "@types/redux": "^3.6.0",
     "@types/redux-saga": "^0.10.5",
     "@types/topojson": "^3.2.1",
+    "chroma-js": "^2.0.2",
     "d3-geo": "^1.11.3",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",

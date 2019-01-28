@@ -2,12 +2,16 @@ import _ from 'lodash';
 import { createSelector } from 'reselect';
 import * as Root from '../rootTypes';
 import { LegislatorRouteProps, StateRouteProps } from './routes';
-import { Representative, Senator } from './types';
+import { filterToRepresentatives, filterToSenators } from './utilities';
 
 const getBranch = (root: Root.State) => root.congress;
 
 function getLegislatorIndex(root: Root.State) {
   return getBranch(root).legislators;
+}
+
+export function getPartyStatsIndex(root: Root.State) {
+  return getBranch(root).partyStats;
 }
 
 export function getLegislatorsForStatePostal(root: Root.State, postal: string) {
@@ -21,12 +25,12 @@ function getLegislatorsForState(root: Root.State, props: StateRouteProps) {
 
 export const getSenatorsForState = createSelector(
   getLegislatorsForState,
-  legislators => _.filter(legislators, 'isSenator') as Senator[]
+  filterToSenators
 );
 
 export const getRepresentativesForState = createSelector(
   getLegislatorsForState,
-  legislators => _.filter(legislators, 'isRepresentative') as Representative[]
+  filterToRepresentatives
 );
 
 function getLegislatorBioguideId(root: any, props: LegislatorRouteProps) {
