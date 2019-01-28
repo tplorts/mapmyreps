@@ -52,13 +52,10 @@ class StateView extends PureComponent<Props> {
             </div>
           </div>
           <div className={styles.legislatorDetails}>
-            <Switch>
-              <Route
-                path={`${this.props.match.path}/:bioguideId(\\w+)`}
-                component={LegislatorView}
-              />
-              <Redirect to={this.props.match.path} />
-            </Switch>
+            <Route
+              path={`${this.props.match.path}/:bioguideId(\\w+)`}
+              component={LegislatorView}
+            />
           </div>
         </div>
       </div>

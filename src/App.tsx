@@ -17,7 +17,6 @@ const App = () => (
     <Switch>
       <Route path='/about' exact component={About} />
       <Route path='/:postal([A-Za-z]{2})' component={StateView} />
-      <Redirect to='' />
     </Switch>
   </div>
 );
