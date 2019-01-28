@@ -3,7 +3,6 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, RouteComponentProps, withRouter } from 'react-router-dom';
 import * as Root from '../../rootTypes';
-import { classNames } from '../../utilities/styles';
 import { StateFeature } from '../types';
 import { MAP_ELEMENT_ID } from './constants';
 import styles from './Map.module.scss';
@@ -62,7 +61,7 @@ class NationalMap extends PureComponent<Props> {
       activeClassName={styles.selected}
     >
       <path
-        className={classNames([styles.state])}
+        className={styles.state}
         style={{ fill: this.getStateColor(state.postal) }}
         d={state.path}
       />
