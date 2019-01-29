@@ -41,7 +41,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "enable-deploy": "chmod +x node_modules/s3-deploy/dist/index.js",
-    "deploy": "node node_modules/s3-deploy/dist/index.js './build/**' --cwd './build/' --deleteRemoved --gzip --bucket 'new-mapmyreps'"
+    "deploy": "node node_modules/s3-deploy/dist/index.js './build/**' --cwd './build/' --deleteRemoved --gzip",
+    "deploy:temporary": "yarn deploy --bucket 'new-mapmyreps'",
+    "deploy:staging": "yarn deploy --bucket 'staging.mapmyreps.us'"
   },
   "eslintConfig": {
     "extends": "react-app"
