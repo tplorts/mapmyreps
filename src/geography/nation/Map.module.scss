@@ -2,7 +2,8 @@
 
 .root {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .svgRoot {
@@ -35,5 +36,24 @@
 
   .selected & {
     opacity: 0.4;
+  }
+}
+
+.settings {
+  margin: 4rem 0;
+  align-self: flex-start;
+  display: flex;
+  flex-direction: row;
+
+  .prodNote {
+    writing-mode: vertical-lr;
+    font-size: 80%;
+    margin-top: 1rem;
+    transform: rotate(180deg);
+    font-style: italic;
+  }
+
+  [app-environment='production'] & {
+    display: none;
   }
 }

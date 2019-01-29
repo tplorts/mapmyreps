@@ -7,6 +7,7 @@ import { StateFeature } from '../types';
 import { MAP_ELEMENT_ID } from './constants';
 import styles from './Map.module.scss';
 import * as selectors from './selectors';
+import { SettingsPanel } from './settings';
 
 const mapStateToProps = (root: Root.State) => {
   const atlas = selectors.getAtlas(root);
@@ -51,6 +52,10 @@ class NationalMap extends PureComponent<Props> {
           <path className={styles.stateBorders} d={this.props.atlas.borders} />
         </g>
       </svg>
+      <div className={styles.settings}>
+        <p className={styles.prodNote}>Will be hidden in production</p>
+        <SettingsPanel />
+      </div>
     </div>
   );
 
