@@ -40,3 +40,14 @@
     font-size: 20px;
   }
 }
+
+[app-environment='development'] {
+  .content h1::after {
+    content: 'dev';
+    position: absolute;
+    margin-top: 2em;
+    margin-left: -6em;
+    font-size: 50%;
+    color: $color-grey-light;
+  }
+}

@@ -9,7 +9,7 @@ import StateView from './congress/StateView';
 import styles from './App.module.scss';
 
 const App = () => (
-  <div className={styles.root}>
+  <div className={styles.root} app-environment={process.env.NODE_ENV}>
     <MainHeader />
     <div className={styles.content}>
       <NationalMap />
