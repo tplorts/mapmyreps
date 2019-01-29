@@ -86,7 +86,6 @@ class StateMap extends PureComponent<Props, ComponentState> {
     return (
       <div className={styles.root}>
         <svg
-          transform={this.state.svgTransform}
           width={viewSize.width}
           height={viewSize.height}
           className={classNames([
@@ -123,7 +122,7 @@ class StateMap extends PureComponent<Props, ComponentState> {
 
   renderDistricts() {
     return (
-      <g>
+      <g className={styles.districtMap} transform={this.state.svgTransform}>
         <g>{_.map(this.state.districtFeatures, this.renderDistrictFeature)}</g>
         <path d={this.state.districtBorders} className={styles.borders} />
       </g>

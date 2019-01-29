@@ -3,22 +3,25 @@
 .root {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  overflow: hidden;
+  padding: 5px;
 }
 
 .controls {
-  position: relative;
+  position: absolute;
   z-index: 1;
 }
 
 .svgRoot {
   filter: blur(10px);
-  transition: filter, transform 0.5s;
+  transition: filter 0.5s;
 
   &.loaded {
     filter: none;
   }
+}
+
+.districtMap {
+  transition: transform 1s;
 }
 
 .district {

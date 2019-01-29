@@ -45,19 +45,20 @@ export function districtZoom(
   const districtCenter = getBoundingBoxCenter(boundingBox);
   const districtSize = getBoundingBoxSize(boundingBox);
 
-  const scaleFactor = Math.min(
+  const scaleFactor = Math.sqrt(Math.min(
     viewSize.width / districtSize.width,
     viewSize.height / districtSize.height
-  );
+  ));
 
-  const offset = {
-    x: viewSize.width / 2 - districtCenter.x,
-    y: viewSize.height / 2 - districtCenter.y,
+  const viewCenter = {
+    x: viewSize.width / 2,
+    y: viewSize.height / 2,
   };
 
   const transforms = [
-    `scale(${Math.sqrt(scaleFactor)})`,
-    `translate(${offset.x}, ${offset.y})`,
+    `translate(${viewCenter.x}, ${viewCenter.y})`,
+    `scale(${scaleFactor})`,
+    `translate(${-districtCenter.x}, ${-districtCenter.y})`,
   ];
   return transforms.join(' ');
 }
