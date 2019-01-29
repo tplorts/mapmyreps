@@ -1,0 +1,31 @@
+$border-width: 1px;
+
+.root {
+  display: flex;
+  flex-direction: row;
+
+  &.vertical {
+    flex-direction: column;
+  }
+}
+
+.option {
+  border: $border-width solid #ddd;
+  padding: 0.2rem 0.5rem;
+  text-align: center;
+  cursor: pointer;
+  user-select: none;
+
+  &:not(:last-child) {
+    border-right-width: 0;
+
+    .vertical & {
+      border-right-width: $border-width;
+      border-bottom-width: 0;
+    }
+  }
+}
+
+.selected {
+  background-color: #eee;
+}
