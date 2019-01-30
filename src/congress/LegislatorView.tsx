@@ -105,7 +105,6 @@ class LegislatorView extends PureComponent<Props> {
     <a
       key={medium.name}
       className={`button socicon-${medium.name}`}
-      target='_blank'
       href={medium.url}
     />
   );
@@ -114,7 +113,6 @@ class LegislatorView extends PureComponent<Props> {
     <a
       key={link.label}
       className='button small'
-      target='_blank'
       href={link.url}
     >
       {link.label}

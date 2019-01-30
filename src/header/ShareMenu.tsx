@@ -42,7 +42,6 @@ class ShareMenu extends PureComponent {
       className={`${styles.link} socicon-${medium}`}
       onClick={this.close}
       href={getShareUrl(medium)}
-      target='_blank'
     />
   );
 }
