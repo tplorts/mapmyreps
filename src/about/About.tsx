@@ -38,12 +38,6 @@ const About = () => (
       <Link className='svg-icon-button' to='/'>
         <Icon name='map' />
       </Link>
-      <section className='options'>
-        <h2>Advanced Options</h2>
-        <button mat-button='mat-button' onClick={openOptionsDialog}>
-          Show Options
-        </button>
-      </section>
       <section className='authors'>
         <h2>Authors</h2>
         <ul>{_.map(authors, renderAuthor)}</ul>
