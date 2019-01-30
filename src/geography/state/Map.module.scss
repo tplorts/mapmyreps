@@ -2,8 +2,16 @@
 
 .root {
   display: flex;
-  flex-direction: column;
-  padding: 5px;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding-top: 6px;
+  padding-left: 6px;
+  padding-bottom: 4px;
+  padding-right: 4px;
+}
+
+.svgWrapper {
+  flex: 1;
 }
 
 .controls {
@@ -21,7 +29,7 @@
 }
 
 .districtMap {
-  transition: transform 1s;
+  transition: transform 0.7s ease-in-out;
 }
 
 .district {

@@ -2,22 +2,19 @@ import _ from 'lodash';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, RouteComponentProps, withRouter } from 'react-router-dom';
+import { AutoFitSvg } from '../../components';
 import * as Root from '../../rootTypes';
 import * as formatters from '../../utilities/formatters';
 import { classNames } from '../../utilities/styles';
-import { ViewSize } from '../types';
+import { XYSize, XYBoundingBox } from '../types';
 import fetchStateDistricts from './fetchDistricts';
 import styles from './Map.module.scss';
 import * as selectors from './selectors';
-import * as svgTransforms from './svgTransforms';
 import SvgDropShadow from './SvgDropShadow';
+import * as svgTransforms from './svgTransforms';
 import { ExtendedDistrictFeature, StateMapProps } from './types';
 
-const viewSize: ViewSize = {
-  width: 320,
-  height: 320,
-  padding: 16,
-};
+const initialSize = { width: 320, height: 320 };
 
 const mapStateToProps = (root: Root.State, ownProps: StateMapProps) => {
   return {
@@ -34,7 +31,9 @@ type ComponentState = {
   loaded: boolean;
   districtFeatures: ExtendedDistrictFeature[];
   districtBorders: string;
-  svgTransform: string;
+  stateBounds: XYBoundingBox;
+  focussedDistrictFeature: ExtendedDistrictFeature | null;
+  svgSize: XYSize;
 };
 
 class StateMap extends PureComponent<Props, ComponentState> {
@@ -42,7 +41,9 @@ class StateMap extends PureComponent<Props, ComponentState> {
     loaded: false,
     districtFeatures: [],
     districtBorders: '',
-    svgTransform: '',
+    stateBounds: { min: { x: 0, y: 0 }, max: { x: 1, y: 1 } },
+    focussedDistrictFeature: null,
+    svgSize: initialSize,
   };
 
   componentDidMount() {
@@ -50,48 +51,64 @@ class StateMap extends PureComponent<Props, ComponentState> {
   }
 
   async fetchDistrictMap() {
-    const { features, borders } = await fetchStateDistricts(
+    const { features, borders, bounds } = await fetchStateDistricts(
       this.props.postalCode,
-      viewSize
+      this.state.svgSize
     );
 
     this.setState({
       loaded: true,
       districtFeatures: features,
       districtBorders: borders,
+      stateBounds: bounds,
     });
   }
 
   get svgTransformInitial() {
-    return svgTransforms.stateFromNation(this.props.stateFeature, viewSize);
+    return svgTransforms.stateFromNation(
+      this.props.stateFeature,
+      this.state.svgSize
+    );
   }
 
   zoomToDistrict = (feature: ExtendedDistrictFeature) => {
-    this.setState({
-      svgTransform: svgTransforms.districtZoom(feature, viewSize),
-    });
+    this.setState({ focussedDistrictFeature: feature });
   };
 
   resetZoom = () => {
-    if (this.state.svgTransform) {
-      this.setState({ svgTransform: '' });
-    }
+    this.setState({ focussedDistrictFeature: null });
+  };
+
+  onSvgResize = (newSize: XYSize) => {
+    this.setState({ svgSize: newSize });
   };
 
   onSelectDistrict = (feature: ExtendedDistrictFeature) => {
     this.zoomToDistrict(feature);
   };
 
+  get districtMapTransform() {
+    const { focussedDistrictFeature } = this.state;
+    const focussedFeature = focussedDistrictFeature || {
+      bounds: this.state.stateBounds,
+    };
+
+    return focussedFeature
+      ? svgTransforms.districtZoom(focussedFeature, this.state.svgSize)
+      : '';
+  }
+
   render() {
     return (
       <div className={styles.root}>
-        <svg
-          width={viewSize.width}
-          height={viewSize.height}
-          className={classNames([
+        <AutoFitSvg
+          initialSize={initialSize}
+          rootClassName={styles.svgWrapper}
+          svgClassName={classNames([
             styles.svgRoot,
             this.state.loaded && styles.loaded,
           ])}
+          onResize={this.onSvgResize}
         >
           <defs>
             <SvgDropShadow filterId='stateShadow' />
@@ -101,10 +118,10 @@ class StateMap extends PureComponent<Props, ComponentState> {
               ? this.renderDistricts()
               : this.renderInitialStatePath()}
           </g>
-        </svg>
+        </AutoFitSvg>
         <div className={styles.controls}>
           {/* <button onClick={this.zoomToDistrict}>+</button> */}
-          {!!this.state.svgTransform && (
+          {!!this.state.focussedDistrictFeature && (
             <button onClick={this.resetZoom}>reset zoom</button>
           )}
         </div>
@@ -122,7 +139,7 @@ class StateMap extends PureComponent<Props, ComponentState> {
 
   renderDistricts() {
     return (
-      <g className={styles.districtMap} transform={this.state.svgTransform}>
+      <g className={styles.districtMap} transform={this.districtMapTransform}>
         <g>{_.map(this.state.districtFeatures, this.renderDistrictFeature)}</g>
         <path d={this.state.districtBorders} className={styles.borders} />
       </g>

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import { TopoJSONBBox, XYBoundingBox, XYPoint, XYSize } from './types';
 
 export function bboxToXYBoundingBox(bbox: TopoJSONBBox): XYBoundingBox {
@@ -23,5 +24,20 @@ export function getBoundingBoxSize(boundingBox: XYBoundingBox): XYSize {
   return {
     width: max.x - min.x,
     height: max.y - min.y,
+  };
+}
+
+export function getNetBoundingBox(
+  boundedFeatures: Array<{ bounds: XYBoundingBox }>
+): XYBoundingBox {
+  return {
+    min: {
+      x: _.min(_.map(boundedFeatures, feature => feature.bounds.min.x)) || 0,
+      y: _.min(_.map(boundedFeatures, feature => feature.bounds.min.y)) || 0,
+    },
+    max: {
+      x: _.max(_.map(boundedFeatures, feature => feature.bounds.max.x)) || 0,
+      y: _.max(_.map(boundedFeatures, feature => feature.bounds.max.y)) || 0,
+    },
   };
 }

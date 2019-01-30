@@ -28,5 +28,5 @@ export type DistrictFeature = Feature<Geometry, DistrictProperties>;
 export interface ExtendedDistrictFeature extends DistrictFeature {
   districtId: number;
   path: string;
-  boundingBox: XYBoundingBox;
+  bounds: XYBoundingBox;
 }

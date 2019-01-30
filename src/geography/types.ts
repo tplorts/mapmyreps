@@ -19,10 +19,6 @@ export interface XYSize {
   height: number;
 }
 
-export interface ViewSize extends XYSize {
-  padding: number;
-}
-
 export type TopoJSONBBox = [[number, number], [number, number]];
 
 export interface XYBoundingBox {

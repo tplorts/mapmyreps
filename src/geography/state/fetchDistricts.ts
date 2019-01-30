@@ -1,12 +1,12 @@
 import { fetchJSON } from '../../utilities/fetchJSON';
 import { getStateByPostal } from '../AmericanStates';
 import { GEOGRAPHY_DATA_URL } from '../constants';
-import { ViewSize } from '../types';
+import { XYSize } from '../types';
 import transformDistricts from './transformDistricts';
 
 export default async function fetchStateDistricts(
   statePostalCode: string,
-  viewSize: ViewSize
+  viewSize: XYSize
 ) {
   const fips = getStateByPostal(statePostalCode)
     .fips.toString()

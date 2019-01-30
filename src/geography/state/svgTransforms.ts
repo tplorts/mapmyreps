@@ -1,10 +1,10 @@
-import { StateFeature, ViewSize } from '../types';
+import { StateFeature, XYSize, XYBoundingBox } from '../types';
 import { getBoundingBoxSize, getBoundingBoxCenter } from '../utilities';
 import { ExtendedDistrictFeature } from './types';
 
 export function stateFromNation(
   stateFeature?: StateFeature,
-  viewSize?: ViewSize
+  viewSize?: XYSize
 ) {
   if (!stateFeature || !viewSize) {
     return '';
@@ -17,16 +17,13 @@ export function stateFromNation(
     x: viewSize.width / 2,
     y: viewSize.height / 2,
   };
-  const renderSize = {
-    width: viewSize.width - 2 * viewSize.padding,
-    height: viewSize.height - 2 * viewSize.padding,
-  };
-  const xScale = renderSize.width / featureSize.width;
-  const yScale = renderSize.height / featureSize.height;
+
+  const xScale = viewSize.width / featureSize.width;
+  const yScale = viewSize.height / featureSize.height;
 
   // Scale the feature so that it fits within the desired rendering box
   const choose = xScale > 1 || yScale > 1 ? Math.min : Math.max;
-  const scale = choose(xScale, yScale);
+  const scale = 0.9 * choose(xScale, yScale);
 
   const transforms = [
     `translate(${viewCenter.x}, ${viewCenter.y})`,
@@ -37,28 +34,33 @@ export function stateFromNation(
 }
 
 export function districtZoom(
-  feature: ExtendedDistrictFeature,
-  viewSize: ViewSize
+  feature: { bounds: XYBoundingBox } | null,
+  viewSize: XYSize,
+  zoom: number = 0.9
 ) {
-  const { boundingBox } = feature;
+  if (!feature) {
+    return '';
+  }
 
-  const districtCenter = getBoundingBoxCenter(boundingBox);
-  const districtSize = getBoundingBoxSize(boundingBox);
+  const { bounds } = feature;
 
-  const scaleFactor = Math.sqrt(Math.min(
-    viewSize.width / districtSize.width,
-    viewSize.height / districtSize.height
-  ));
+  const featureCenter = getBoundingBoxCenter(bounds);
+  const featureSize = getBoundingBoxSize(bounds);
 
   const viewCenter = {
     x: viewSize.width / 2,
     y: viewSize.height / 2,
   };
 
+  const xScale = viewSize.width / featureSize.width;
+  const yScale = viewSize.height / featureSize.height;
+
+  const scaleFactor = zoom * Math.min(xScale, yScale);
+
   const transforms = [
     `translate(${viewCenter.x}, ${viewCenter.y})`,
     `scale(${scaleFactor})`,
-    `translate(${-districtCenter.x}, ${-districtCenter.y})`,
+    `translate(${-featureCenter.x}, ${-featureCenter.y})`,
   ];
   return transforms.join(' ');
 }
