@@ -29,7 +29,6 @@
     "redux": "^4.0.1",
     "redux-saga": "^1.0.0",
     "reselect": "^4.0.0",
-    "s3-deploy": "^1.2.0",
     "topojson": "^3.0.2",
     "typesafe-actions": "^3.0.0",
     "typescript": "3.2.2",
@@ -40,8 +39,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "enable-deploy": "chmod +x node_modules/s3-deploy/dist/index.js",
-    "deploy": "node node_modules/s3-deploy/dist/index.js './build/**' --cwd './build/' --deleteRemoved --gzip",
+    "deploy": "s3-deploy './build/**' --cwd './build/' --deleteRemoved --gzip",
     "deploy:production": "yarn deploy --bucket 'mapmyreps.us'",
     "deploy:staging": "yarn deploy --bucket 'staging.mapmyreps.us'"
   },
@@ -53,5 +51,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "s3-deploy": "^1.3.0"
+  }
 }
