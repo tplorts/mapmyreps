@@ -2,7 +2,7 @@ import _ from 'lodash';
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, RouteComponentProps, withRouter } from 'react-router-dom';
-import { AutoFitSvg } from '../../components';
+import { AutoFitSvg, SvgDropShadow } from '../../components';
 import * as Root from '../../rootTypes';
 import * as formatters from '../../utilities/formatters';
 import { classNames } from '../../utilities/styles';
@@ -10,7 +10,6 @@ import { XYSize, XYBoundingBox } from '../types';
 import fetchStateDistricts from './fetchDistricts';
 import styles from './Map.module.scss';
 import * as selectors from './selectors';
-import SvgDropShadow from './SvgDropShadow';
 import * as svgTransforms from './svgTransforms';
 import { ExtendedDistrictFeature, StateMapProps } from './types';
 
