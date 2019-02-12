@@ -4,15 +4,13 @@ export type SocialMedium =
   | 'mail'
   | 'twitter'
   | 'facebook'
-  | 'pinterest'
-  | 'googleplus';
+  | 'pinterest';
 
 export const shareMedia: SocialMedium[] = [
   'mail',
   'twitter',
   'facebook',
   'pinterest',
-  'googleplus',
 ];
 
 const mapmyrepsUrl = 'http://mapmyreps.us';
@@ -53,11 +51,6 @@ const shareUrlIndex = {
     `https://www.pinterest.com/pin/create/button/?` +
     queryParams({
       description: message,
-      url: mapmyrepsUrl,
-    }),
-  googleplus:
-    `https://plus.google.com/share?` +
-    queryParams({
       url: mapmyrepsUrl,
     }),
 };
