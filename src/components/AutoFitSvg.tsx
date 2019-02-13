@@ -5,6 +5,7 @@ import styles from './AutoFitSvg.module.scss';
 
 interface Props {
   initialSize: XYSize;
+  preserveAspectRatio?: boolean;
   debounceDelay?: number;
   svgClassName?: string;
   rootClassName?: string;
@@ -18,6 +19,7 @@ interface State {
 
 class AutoFitSvg extends PureComponent<Props, State> {
   static defaultProps = {
+    preserveAspectRatio: false,
     debounceDelay: 250,
     svgClassName: '',
     rootClassName: '',
@@ -28,15 +30,25 @@ class AutoFitSvg extends PureComponent<Props, State> {
   state = { ...this.props.initialSize };
 
   resize = () => {
-    if (this.rootElement) {
-      const { width } = this.rootElement.getBoundingClientRect();
-      this.setState(() => ({ width }));
-
-      const { onResize } = this.props;
-      if (onResize) {
-        onResize({ width, height: this.state.height });
-      }
+    if (!this.rootElement) {
+      return;
     }
+
+    const { width } = this.rootElement.getBoundingClientRect();
+    const onResize = this.props.onResize || _.noop;
+    const { initialSize } = this.props;
+
+    const heightScaleFactor = this.props.preserveAspectRatio
+      ? width / initialSize.width
+      : 1;
+
+    const newSize = {
+      width,
+      height: initialSize.height * heightScaleFactor,
+    };
+
+    this.setState(newSize);
+    onResize(newSize);
   };
 
   resizeDebounced = _.debounce(this.resize, this.props.debounceDelay);

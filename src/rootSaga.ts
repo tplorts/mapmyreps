@@ -1,13 +1,11 @@
-import _ from 'lodash';
-import { fork, all, call, delay } from 'redux-saga/effects';
+import { all, call, delay } from 'redux-saga/effects';
+import loadCongressSaga from './congress/load.saga';
 import { loadNationalAtlasSaga } from './geography/nation/saga';
 import removeAppLoader from './removeAppLoader';
-import viewportResizeWatcher from './viewport/resizeWatcher';
-import nationalMapResizeWatcher from './geography/nation/resize.saga';
-import loadCongressSaga from './congress/load.saga';
 
 export default function* rootSaga() {
-  yield fork(initiateWatchers);
+  // Might end up using other watchers later
+  // yield fork(initiateWatchers);
 
   yield all([
     call(loadNationalAtlasSaga),
@@ -19,11 +17,8 @@ export default function* rootSaga() {
   yield call(removeAppLoader);
 }
 
-const watcherSagas = [
-  viewportResizeWatcher,
-  nationalMapResizeWatcher,
-];
-
-export function* initiateWatchers() {
-  yield all(_.map(watcherSagas, watcher => call(watcher)));
-}
+// const watcherSagas = [
+// ];
+// export function* initiateWatchers() {
+//   yield all(_.map(watcherSagas, watcher => call(watcher)));
+// }

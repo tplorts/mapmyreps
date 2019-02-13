@@ -4,11 +4,13 @@ import * as Root from '../../rootTypes';
 import * as nationalSelectors from '../nation/selectors';
 import { StateMapProps } from './types';
 
-const getStateFeaturesOfNationalAtlas = (root: Root.State) =>
-  nationalSelectors.getAtlas(root).features;
+function getStateFeaturesOfNationalAtlas(root: Root.State) {
+  return _.get(nationalSelectors.getAtlas(root), 'features', []);
+}
 
-const getSelectedStatePostalCode = (root: any, props: StateMapProps) =>
-  props.postalCode;
+function getSelectedStatePostalCode(root: any, props: StateMapProps) {
+  return props.postalCode;
+}
 
 export const getStateFeature = createSelector(
   [getStateFeaturesOfNationalAtlas, getSelectedStatePostalCode],

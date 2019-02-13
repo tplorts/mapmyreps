@@ -11,9 +11,6 @@ const getBranch = (state: Root.State) => state.geography.nation;
 
 export const getAtlas = (state: Root.State) => getBranch(state).atlas;
 
-export const getMapScaleFactor = (state: Root.State) =>
-  getBranch(state).scaleFactor;
-
 export const getStateColorIndex = createSelector(
   [getPartyStatsIndex, getColoringChamber, getColorSpace],
   (partyStats, chamber, colorSpace) => {
